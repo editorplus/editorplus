@@ -1,0 +1,25 @@
+{
+  "name": "editorplus",
+  "description": "",
+  "version": "2.0.1",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/casoa/editorplus",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/casoa/editorplus.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/casoa/editorplus/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-uglify": "^1.0.2",
+    "grunt-contrib-copy": "^0.8.2"
+  }
+}
