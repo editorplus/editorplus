@@ -350,7 +350,8 @@
         textarea.style.height = me.iframe.offsetHeight + 'px';
       }
 
-      textarea.value = me.getContent();
+      // textarea.value = me.getContent();
+      textarea.value = '';
       textarea.id = me.key;
       container.innerHTML = '';
 
@@ -1357,7 +1358,10 @@
      * ```
      */
     getLang: function (path) {
-      var lang = UE.I18N[this.options.lang];
+      var lang = 'zh-cn';
+      if (_.isObject(this.options) && this.options.lang) {
+        lang = UE.I18N[this.options.lang];
+      }
       if (!lang) {
         throw Error("not import language file");
       }
