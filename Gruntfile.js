@@ -132,7 +132,7 @@ module.exports = function (grunt) {
           '_src/adapter/message.js',
           '_src/adapter/autosave.js'
         ],
-        dest: releasedir + pkgJson.name + '.all.js'
+        dest: releasedir + 'editorplus.all.js'
       },
       parse: {
         options: {
@@ -148,7 +148,7 @@ module.exports = function (grunt) {
           '_parse/list.js',
           '_parse/video.js'
         ],
-        dest: releasedir + pkgJson.name + '.parse.js'
+        dest: releasedir + 'editorplus.parse.js'
       }
     },
     uglify: {
@@ -156,12 +156,12 @@ module.exports = function (grunt) {
         banner: banner
       },
       dest: {
-        src: releasedir + '<%= pkg.name %>.all.js',
-        dest: releasedir + '<%= pkg.name %>.all.min.js'
+        src: releasedir + 'editorplus.all.js',
+        dest: releasedir + 'editorplus.all.min.js'
       },
       parse: {
-        src: releasedir + '<%= pkg.name %>.parse.js',
-        dest: releasedir + '<%= pkg.name %>.parse.min.js'
+        src: releasedir + 'editorplus.parse.js',
+        dest: releasedir + 'editorplus.parse.min.js'
       }
     },
     copy: {
