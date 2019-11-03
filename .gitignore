@@ -4,4 +4,8 @@ node_modules/
 _test/
 net/
 
+dist/*
+!dist/editorplus.config.js
+!dist/index.html
+
 package-lock.json

@@ -78,11 +78,19 @@ UE.plugins['catchremoteimage'] = function () {
                             }
                         }
                     }
-                    me.fireEvent('catchremotesuccess')
+                    me.fireEvent('catchremotesuccess');
+
+                  if (_ && _.isFunction(me.options.afterCatchImage)) {
+                    me.options.afterCatchImage();
+                  }
                 },
                 //回调失败，本次请求超时
                 error: function () {
                     me.fireEvent("catchremoteerror");
+
+                  if (_ && _.isFunction(me.options.afterCatchImage)) {
+                    me.options.afterCatchImage();
+                  }
                 }
             });
         }
@@ -99,6 +107,11 @@ UE.plugins['catchremoteimage'] = function () {
                     'onerror': callbacks["error"]
                 };
             opt[catcherFieldName] = imgs;
+
+            if (_ && _.isFunction(me.options.beforeCatchImage)) {
+              me.options.beforeCatchImage();
+            }
+
             ajax.request(url, opt);
         }
 
