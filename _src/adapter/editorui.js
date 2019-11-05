@@ -608,6 +608,45 @@
         return ui;
     };
 
+    editorui.outpadding = function (editor) {
+        var val = editor.options.outpadding || [];
+        if (!val.length)return;
+        for (var i = 0, ci, items = []; ci = val[i++];) {
+            items.push({
+                //todo:写死了
+                label:ci,
+                value:ci,
+                theme:editor.options.theme,
+                onclick:function () {
+                    editor.execCommand("outpadding", this.value);
+                }
+            })
+        }
+        var ui = new editorui.MenuButton({
+            editor:editor,
+            className:'edui-for-outpadding',
+            title:editor.options.labelMap['outpadding'] || editor.getLang("labelMap.outpadding") || '',
+            items:items,
+            onbuttonclick:function () {
+                var value = editor.queryCommandValue('OutPadding') || this.value;
+                editor.execCommand("OutPadding", value);
+            }
+        });
+        editorui.buttons['outpadding'] = ui;
+        editor.addListener('selectionchange', function () {
+            var state = editor.queryCommandState('OutPadding');
+            if (state == -1) {
+                ui.setDisabled(true);
+            } else {
+                ui.setDisabled(false);
+                var value = editor.queryCommandValue('OutPadding');
+                value && ui.setValue((value + '').replace(/cm/, ''));
+                ui.setChecked(state)
+            }
+        });
+        return ui;
+    };
+
     var rowspacings = ['top', 'bottom'];
     for (var r = 0, ri; ri = rowspacings[r++];) {
         (function (cmd) {

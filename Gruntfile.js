@@ -60,6 +60,7 @@ module.exports = function (grunt) {
           '_src/plugins/time.js',
           '_src/plugins/rowspacing.js',
           '_src/plugins/lineheight.js',
+          '_src/plugins/outpadding.js',
           '_src/plugins/insertcode.js',
           '_src/plugins/cleardoc.js',
           '_src/plugins/anchor.js',
