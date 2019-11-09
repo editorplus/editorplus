@@ -1,7 +1,7 @@
 {
   "name": "@editorplus/editorplus",
   "description": "",
-  "version": "2.0.8",
+  "version": "2.1.0",
   "files": [
     "dist"
   ],
@@ -23,10 +23,9 @@
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^1.0.2",
-    "semistandard": "^14.2.0",
-    "standard": "^14.3.1"
+    "semistandard": "^14.2.0"
   },
   "scripts": {
-    "csfix": "semistandard --fix _parse/*.js"
+    "csfix": "semistandard --fix {_parse,_src,dialogs}/**/*.js"
   }
 }
