@@ -1,4 +1,4 @@
-UE.parse.register('vedio', function (utils) {
+UE.parse.register('vedio', function(utils) {
   var video = this.root.getElementsByTagName('video'),
     audio = this.root.getElementsByTagName('audio');
 
@@ -14,22 +14,25 @@ UE.parse.register('vedio', function (utils) {
       videojs.autoSetup();
     } else {
       utils.loadFile(document, {
-        id: "video_css",
-        tag: "link",
-        rel: "stylesheet",
-        type: "text/css",
+        id: 'video_css',
+        tag: 'link',
+        rel: 'stylesheet',
+        type: 'text/css',
         href: cssurl
       });
-      utils.loadFile(document, {
-        id: "video_js",
-        src: jsurl,
-        tag: "script",
-        type: "text/javascript"
-      }, function () {
-        videojs.options.flash.swf = swfUrl;
-        videojs.autoSetup();
-      });
+      utils.loadFile(
+        document,
+        {
+          id: 'video_js',
+          src: jsurl,
+          tag: 'script',
+          type: 'text/javascript'
+        },
+        function() {
+          videojs.options.flash.swf = swfUrl;
+          videojs.autoSetup();
+        }
+      );
     }
-
   }
 });
