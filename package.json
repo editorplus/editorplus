@@ -23,9 +23,11 @@
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^1.0.2",
+    "lebab": "^3.1.0",
     "semistandard": "^14.2.0"
   },
   "scripts": {
-    "csfix": "semistandard --fix {_parse,_src,dialogs}/**/*.js"
+    "csfix": "semistandard --fix \"{_parse,_src,dialogs}/**/*.js\"",
+    "es5es6": "lebab --replace \"{_parse,_src,dialogs}/**/*.js\" --transform for-of,for-each"
   }
 }
