@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 module.exports = function (grunt) {
   var pkgJson = grunt.file.readJSON('package.json');
-  var releasedir = "dist/";
-  var banner = '/*!\n * name: '+ pkgJson.name +'\n * version: ' + pkgJson.version + '\n * build: <%= new Date() %>\n */\n\n';
+  var releasedir = 'dist/';
+  var banner = '/*!\n * name: ' + pkgJson.name + '\n * version: ' + pkgJson.version + '\n * build: <%= new Date() %>\n */\n\n';
 
   grunt.initConfig({
     pkg: pkgJson,
