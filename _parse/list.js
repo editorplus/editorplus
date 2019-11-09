@@ -1,26 +1,25 @@
 UE.parse.register('list', function (utils) {
-  var customCss = [],
-    customStyle = {
-      'cn': 'cn-1-',
-      'cn1': 'cn-2-',
-      'cn2': 'cn-3-',
-      'num': 'num-1-',
-      'num1': 'num-2-',
-      'num2': 'num-3-',
-      'dash': 'dash',
-      'dot': 'dot'
-    };
-
+  var customCss = [];
+  var customStyle = {
+    cn: 'cn-1-',
+    cn1: 'cn-2-',
+    cn2: 'cn-3-',
+    num: 'num-1-',
+    num1: 'num-2-',
+    num2: 'num-3-',
+    dash: 'dash',
+    dot: 'dot'
+  };
 
   utils.extend(this, {
     liiconpath: 'https://bs.baidu.com/listicon/',
     listDefaultPaddingLeft: '20'
   });
 
-  var root = this.root,
-    ols = root.getElementsByTagName('ol'),
-    uls = root.getElementsByTagName('ul'),
-    selector = this.selector;
+  var root = this.root;
+  var ols = root.getElementsByTagName('ol');
+  var uls = root.getElementsByTagName('ul');
+  var selector = this.selector;
 
   if (ols.length) {
     applyStyle.call(this, ols);
@@ -46,7 +45,6 @@ UE.parse.register('list', function (utils) {
         if (listStyle == 'dash' || listStyle == 'dot') {
           utils.pushItem(customCss, selector + ' li.list-' + customStyle[listStyle] + '{background-image:url(' + T.liiconpath + customStyle[listStyle] + '.gif)}');
           utils.pushItem(customCss, selector + ' ul.custom_' + listStyle + '{list-style:none;} ' + selector + ' ul.custom_' + listStyle + ' li{background-position:0 3px;background-repeat:no-repeat}');
-
         } else {
           var index = 1;
           utils.each(list.childNodes, function (li) {
@@ -90,6 +88,4 @@ UE.parse.register('list', function (utils) {
       }
     });
   }
-
-
 });

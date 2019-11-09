@@ -21,7 +21,12 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^1.0.2",
-    "grunt-contrib-copy": "^0.8.2"
+    "semistandard": "^14.2.0",
+    "standard": "^14.3.1"
+  },
+  "scripts": {
+    "csfix": "semistandard --fix _parse/*.js"
   }
 }
