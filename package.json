@@ -23,6 +23,10 @@
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^1.0.2",
-    "prettier": "^1.19.0"
+    "semistandard": "^14.2.0",
+    "standard": "^14.3.1"
+  },
+  "scripts": {
+    "csfix": "semistandard --fix _parse/*.js"
   }
 }
