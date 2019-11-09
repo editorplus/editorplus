@@ -19,11 +19,10 @@
  * @class Range
  */
 
-
 (function () {
-  var guid = 0,
-    fillChar = domUtils.fillChar,
-    fillData;
+  var guid = 0;
+  var fillChar = domUtils.fillChar;
+  var fillData;
 
   /**
    * 更新range的collapse状态
@@ -37,11 +36,11 @@
   }
 
   function selectOneNode (rng) {
-    return !rng.collapsed && rng.startContainer.nodeType == 1 && rng.startContainer === rng.endContainer && rng.endOffset - rng.startOffset == 1
+    return !rng.collapsed && rng.startContainer.nodeType == 1 && rng.startContainer === rng.endContainer && rng.endOffset - rng.startOffset == 1;
   }
 
   function setEndPoint (toStart, node, offset, range) {
-    //如果node是自闭合标签要处理
+    // 如果node是自闭合标签要处理
     if (node.nodeType == 1 && (dtd.$empty[node.tagName] || dtd.$nonChild[node.tagName])) {
       offset = domUtils.getNodeIndex(node) + (toStart ? 0 : 1);
       node = node.parentNode;
@@ -64,15 +63,15 @@
   }
 
   function execContentsAction (range, action) {
-    //调整边界
-    //range.includeBookmark();
-    var start = range.startContainer,
-      end = range.endContainer,
-      startOffset = range.startOffset,
-      endOffset = range.endOffset,
-      doc = range.document,
-      frag = doc.createDocumentFragment(),
-      tmpStart, tmpEnd;
+    // 调整边界
+    // range.includeBookmark();
+    var start = range.startContainer;
+    var end = range.endContainer;
+    var startOffset = range.startOffset;
+    var endOffset = range.endOffset;
+    var doc = range.document;
+    var frag = doc.createDocumentFragment();
+    var tmpStart; var tmpEnd;
     if (start.nodeType == 1) {
       start = start.childNodes[startOffset] || (tmpStart = start.appendChild(doc.createTextNode('')));
     }
@@ -81,15 +80,15 @@
     }
     if (start === end && start.nodeType == 3) {
       frag.appendChild(doc.createTextNode(start.substringData(startOffset, endOffset - startOffset)));
-      //is not clone
+      // is not clone
       if (action) {
         start.deleteData(startOffset, endOffset - startOffset);
         range.collapse(true);
       }
       return frag;
     }
-    var current, currentLevel, clone = frag,
-      startParents = domUtils.findParents(start, true), endParents = domUtils.findParents(end, true);
+    var current; var currentLevel; var clone = frag;
+    var startParents = domUtils.findParents(start, true); var endParents = domUtils.findParents(end, true);
     for (var i = 0; startParents[i] == endParents[i];) {
       i++;
     }
@@ -99,7 +98,7 @@
         if (!tmpStart) {
           if (range.startContainer.nodeType == 3) {
             clone.appendChild(doc.createTextNode(start.nodeValue.slice(startOffset)));
-            //is not clone
+            // is not clone
             if (action) {
               start.deleteData(startOffset, start.nodeValue.length - startOffset);
             }
@@ -131,7 +130,7 @@
       if (ei == end) {
         if (!tmpEnd && range.endContainer.nodeType == 3) {
           clone.appendChild(doc.createTextNode(end.substringData(0, endOffset)));
-          //is not clone
+          // is not clone
           if (action) {
             end.deleteData(0, endOffset);
           }
@@ -140,7 +139,7 @@
         currentLevel = ei.cloneNode(false);
         clone.appendChild(currentLevel);
       }
-      //如果两端同级，右边第一次已经被开始做了
+      // 如果两端同级，右边第一次已经被开始做了
       if (j != i || !startParents[i]) {
         while (current) {
           if (current === start) {
@@ -217,9 +216,9 @@
           var tmpNode = fillData.parentNode;
           domUtils.remove(fillData);
           while (tmpNode && domUtils.isEmptyInlineElement(tmpNode) &&
-            //safari的contains有bug
+            // safari的contains有bug
             (browser.safari ? !(domUtils.getPosition(tmpNode, excludeNode) & domUtils.POSITION_CONTAINS) : !tmpNode.contains(excludeNode))
-            ) {
+          ) {
             fillData = tmpNode.parentNode;
             domUtils.remove(tmpNode);
             tmpNode = fillData;
@@ -636,7 +635,6 @@
     cloneRange: function () {
       var me = this;
       return new Range(me.document).setStart(me.startContainer, me.startOffset).setEnd(me.endContainer, me.endOffset);
-
     },
 
     /**
@@ -737,26 +735,26 @@
      * @see UE.dom.domUtils.Range:shrinkBoundary()
      */
     shrinkBoundary: function (ignoreEnd) {
-      var me = this, child,
-        collapsed = me.collapsed;
+      var me = this; var child;
+      var collapsed = me.collapsed;
 
       function check (node) {
-        return node.nodeType == 1 && !domUtils.isBookmarkNode(node) && !dtd.$empty[node.tagName] && !dtd.$nonChild[node.tagName]
+        return node.nodeType == 1 && !domUtils.isBookmarkNode(node) && !dtd.$empty[node.tagName] && !dtd.$nonChild[node.tagName];
       }
 
-      while (me.startContainer.nodeType == 1 //是element
-      && (child = me.startContainer.childNodes[me.startOffset]) //子节点也是element
-      && check(child)) {
+      while (me.startContainer.nodeType == 1 && // 是element
+      (child = me.startContainer.childNodes[me.startOffset]) && // 子节点也是element
+      check(child)) {
         me.setStart(child, 0);
       }
       if (collapsed) {
         return me.collapse(true);
       }
       if (!ignoreEnd) {
-        while (me.endContainer.nodeType == 1//是element
-        && me.endOffset > 0 //如果是空元素就退出 endOffset=0那么endOffst-1为负值，childNodes[endOffset]报错
-        && (child = me.endContainer.childNodes[me.endOffset - 1]) //子节点也是element
-        && check(child)) {
+        while (me.endContainer.nodeType == 1 &&// 是element
+        me.endOffset > 0 && // 如果是空元素就退出 endOffset=0那么endOffst-1为负值，childNodes[endOffset]报错
+        (child = me.endContainer.childNodes[me.endOffset - 1]) && // 子节点也是element
+        check(child)) {
           me.setEnd(child, child.childNodes.length);
         }
       }
@@ -844,16 +842,15 @@
      * ```
      */
     getCommonAncestor: function (includeSelf, ignoreTextNode) {
-      var me = this,
-        start = me.startContainer,
-        end = me.endContainer;
+      var me = this;
+      var start = me.startContainer;
+      var end = me.endContainer;
       if (start === end) {
         if (includeSelf && selectOneNode(this)) {
           start = start.childNodes[me.startOffset];
-          if (start.nodeType == 1)
-            return start;
+          if (start.nodeType == 1) { return start; }
         }
-        //只有在上来就相等的情况下才会出现是文本的情况
+        // 只有在上来就相等的情况下才会出现是文本的情况
         return ignoreTextNode && start.nodeType == 3 ? start.parentNode : start;
       }
       return domUtils.getCommonAncestor(start, end);
@@ -906,10 +903,10 @@
      */
     trimBoundary: function (ignoreEnd) {
       this.txtToElmBoundary();
-      var start = this.startContainer,
-        offset = this.startOffset,
-        collapsed = this.collapsed,
-        end = this.endContainer;
+      var start = this.startContainer;
+      var offset = this.startOffset;
+      var collapsed = this.collapsed;
+      var end = this.endContainer;
       if (start.nodeType == 3) {
         if (offset == 0) {
           this.setStartBefore(start);
@@ -918,7 +915,7 @@
             this.setStartAfter(start);
           } else {
             var textNode = domUtils.split(start, offset);
-            //跟新结束边界
+            // 跟新结束边界
             if (start === end) {
               this.setEnd(textNode, this.endOffset - offset);
             } else if (start.parentNode === end) {
@@ -963,8 +960,8 @@
      */
     txtToElmBoundary: function (ignoreCollapsed) {
       function adjust (r, c) {
-        var container = r[c + 'Container'],
-          offset = r[c + 'Offset'];
+        var container = r[c + 'Container'];
+        var offset = r[c + 'Offset'];
         if (container.nodeType == 3) {
           if (!offset) {
             r['set' + c.replace(/(\w)/, function (a) {
@@ -993,14 +990,14 @@
      * @return { UE.dom.Range } 当前range对象
      */
     insertNode: function (node) {
-      var first = node, length = 1;
+      var first = node; var length = 1;
       if (node.nodeType == 11) {
         first = node.firstChild;
         length = node.childNodes.length;
       }
       this.trimBoundary(true);
-      var start = this.startContainer,
-        offset = this.startOffset;
+      var start = this.startContainer;
+      var offset = this.startOffset;
       var nextNode = start.childNodes[offset];
       if (nextNode) {
         start.insertBefore(node, nextNode);
@@ -1042,8 +1039,8 @@
      *                          返回的记录的类型为ID， 反之则为引用
      */
     createBookmark: function (serialize, same) {
-      var endNode,
-        startNode = this.document.createElement('span');
+      var endNode;
+      var startNode = this.document.createElement('span');
       startNode.style.cssText = 'display:none;line-height:0px;';
       startNode.appendChild(this.document.createTextNode('\u200D'));
       startNode.id = '_baidu_bookmark_start_' + (same ? '' : guid++);
@@ -1061,7 +1058,7 @@
         start: serialize ? startNode.id : startNode,
         end: endNode ? serialize ? endNode.id : endNode : null,
         id: serialize
-      }
+      };
     },
 
     /**
@@ -1072,8 +1069,8 @@
      *  @see UE.dom.Range:createBookmark(Boolean)
      */
     moveToBookmark: function (bookmark) {
-      var start = bookmark.id ? this.document.getElementById(bookmark.start) : bookmark.start,
-        end = bookmark.end && bookmark.id ? this.document.getElementById(bookmark.end) : bookmark.end;
+      var start = bookmark.id ? this.document.getElementById(bookmark.start) : bookmark.start;
+      var end = bookmark.end && bookmark.id ? this.document.getElementById(bookmark.end) : bookmark.end;
       this.setStartBefore(start);
       domUtils.remove(start);
       if (end) {
@@ -1100,13 +1097,13 @@
      * @return { UE.dom.Range } 当前range对象
      */
     enlarge: function (toBlock, stopFn) {
-      var isBody = domUtils.isBody,
-        pre, node, tmp = this.document.createTextNode('');
+      var isBody = domUtils.isBody;
+      var pre; var node; var tmp = this.document.createTextNode('');
       if (toBlock) {
         node = this.startContainer;
         if (node.nodeType == 1) {
           if (node.childNodes[this.startOffset]) {
-            pre = node = node.childNodes[this.startOffset]
+            pre = node = node.childNodes[this.startOffset];
           } else {
             node.appendChild(tmp);
             pre = node = tmp;
@@ -1200,13 +1197,12 @@
         while (!domUtils.isBody(this.startContainer) &&
           this.startOffset == this.startContainer[this.startContainer.nodeType == 3 ? 'nodeValue' : 'childNodes'].length &&
           this.startContainer[this.startContainer.nodeType == 3 ? 'nodeValue' : 'childNodes'].length
-          ) {
-
+        ) {
           this.setStartAfter(this.startContainer);
         }
         while (!domUtils.isBody(this.endContainer) && !this.endOffset &&
           this.endContainer[this.endContainer.nodeType == 3 ? 'nodeValue' : 'childNodes'].length
-          ) {
+        ) {
           this.setEndBefore(this.endContainer);
         }
       }
@@ -1247,17 +1243,17 @@
       if (this.collapsed) return this;
       this.trimBoundary().enlarge(false,
         function (node) {
-          return node.nodeType == 1 && domUtils.isBlockElm(node)
+          return node.nodeType == 1 && domUtils.isBlockElm(node);
         }).adjustmentBoundary();
-      var bookmark = this.createBookmark(),
-        end = bookmark.end,
-        filterFn = function (node) {
-          return node.nodeType == 1 ? node.tagName.toLowerCase() != 'br' : !domUtils.isWhitespace(node);
-        },
-        current = domUtils.getNextDomNode(bookmark.start, false, filterFn),
-        node,
-        pre,
-        range = this.cloneRange();
+      var bookmark = this.createBookmark();
+      var end = bookmark.end;
+      var filterFn = function (node) {
+        return node.nodeType == 1 ? node.tagName.toLowerCase() != 'br' : !domUtils.isWhitespace(node);
+      };
+      var current = domUtils.getNextDomNode(bookmark.start, false, filterFn);
+      var node;
+      var pre;
+      var range = this.cloneRange();
       while (current && (domUtils.getPosition(current, end) & domUtils.POSITION_PRECEDING)) {
         if (current.nodeType == 3 || dtd[tagName][current.tagName]) {
           range.setStartBefore(current);
@@ -1268,7 +1264,7 @@
               return dtd[tagName][parent.tagName];
             });
           }
-          var frag = range.setEndAfter(pre).extractContents(), elm;
+          var frag = range.setEndAfter(pre).extractContents(); var elm;
           if (list && list.length > 0) {
             var level, top;
             top = level = list[0].cloneNode(false);
@@ -1285,7 +1281,7 @@
           }
           elm.appendChild(frag);
           range.insertNode(list ? top : elm);
-          //处理下滑线在a上的情况
+          // 处理下滑线在a上的情况
           var aNode;
           if (tagName == 'span' && attrs.style && /text\-decoration/.test(attrs.style) && (aNode = domUtils.findParentByTagName(elm, 'a', true))) {
             domUtils.setAttributes(aNode, attrs);
@@ -1295,7 +1291,7 @@
             domUtils.mergeSibling(elm);
             domUtils.clearEmptySibling(elm);
           }
-          //去除子节点相同的
+          // 去除子节点相同的
           domUtils.mergeChild(elm, attrs);
           current = domUtils.getNextDomNode(elm, false, filterFn);
           domUtils.mergeToParent(elm);
@@ -1331,7 +1327,7 @@
       if (this.collapsed) return this;
       tagNames = utils.isArray(tagNames) ? tagNames : [tagNames];
       this.shrinkBoundary().adjustmentBoundary();
-      var start = this.startContainer, end = this.endContainer;
+      var start = this.startContainer; var end = this.endContainer;
       while (1) {
         if (start.nodeType == 1) {
           if (utils.indexOf(tagNames, start.tagName.toLowerCase()) > -1) {
@@ -1356,9 +1352,9 @@
         }
         end = end.parentNode;
       }
-      var bookmark = this.createBookmark(),
-        frag,
-        tmpRange;
+      var bookmark = this.createBookmark();
+      var frag;
+      var tmpRange;
       if (start) {
         tmpRange = this.cloneRange().setEndBefore(bookmark.start).setStartBefore(start);
         frag = tmpRange.extractContents();
@@ -1375,7 +1371,7 @@
       }
       var current = domUtils.getNextDomNode(bookmark.start, false, function (node) {
         return node.nodeType == 1;
-      }), next;
+      }); var next;
       while (current && current !== bookmark.end) {
         next = domUtils.getNextDomNode(current, true, function (node) {
           return node.nodeType == 1;
@@ -1412,13 +1408,12 @@
      * @method select
      * @return { UE.dom.Range } 返回当前Range对象
      */
-    //这里不区分ie9以上，trace:3824
+    // 这里不区分ie9以上，trace:3824
     select: function (notInsertFillData) {
       function checkOffset (rng) {
-
         function check (node, offset, dir) {
           if (node.nodeType == 3 && node.nodeValue.length < offset) {
-            rng[dir + 'Offset'] = node.nodeValue.length
+            rng[dir + 'Offset'] = node.nodeValue.length;
           }
         }
 
@@ -1426,36 +1421,34 @@
         check(rng.endContainer, rng.endOffset, 'end');
       }
 
-      var win = domUtils.getWindow(this.document),
-        sel = win.getSelection(),
-        txtNode;
-      //FF下关闭自动长高时滚动条在关闭dialog时会跳
-      //ff下如果不body.focus将不能定位闭合光标到编辑器内
+      var win = domUtils.getWindow(this.document);
+      var sel = win.getSelection();
+      var txtNode;
+      // FF下关闭自动长高时滚动条在关闭dialog时会跳
+      // ff下如果不body.focus将不能定位闭合光标到编辑器内
       browser.gecko ? this.document.body.focus() : win.focus();
       if (sel) {
         sel.removeAllRanges();
         // trace:870 chrome/safari后边是br对于闭合得range不能定位 所以去掉了判断
         // this.startContainer.nodeType != 3 &&! ((child = this.startContainer.childNodes[this.startOffset]) && child.nodeType == 1 && child.tagName == 'BR'
         if (this.collapsed && !notInsertFillData) {
-          //处理光标落在文本节点的情况
-          //处理以下的情况
-          //<b>|xxxx</b>
-          //<b>xxxx</b>|xxxx
-          //xxxx<b>|</b>
-          var start = this.startContainer, child = start;
+          // 处理光标落在文本节点的情况
+          // 处理以下的情况
+          // <b>|xxxx</b>
+          // <b>xxxx</b>|xxxx
+          // xxxx<b>|</b>
+          var start = this.startContainer; var child = start;
           if (start.nodeType == 1) {
             child = start.childNodes[this.startOffset];
-
           }
           if (!(start.nodeType == 3 && this.startOffset) &&
-            (child ?
-                (!child.previousSibling || child.previousSibling.nodeType != 3)
-                :
-                (!start.lastChild || start.lastChild.nodeType != 3)
+            (child
+              ? (!child.previousSibling || child.previousSibling.nodeType != 3)
+              : (!start.lastChild || start.lastChild.nodeType != 3)
             )
           ) {
             txtNode = this.document.createTextNode(fillChar);
-            //跟着前边走
+            // 跟着前边走
             this.insertNode(txtNode);
             removeFillData(this.document, txtNode);
             mergeSibling(txtNode, 'previousSibling');
@@ -1465,7 +1458,7 @@
           }
         }
         var nativeRange = this.document.createRange();
-        //是createAddress最后一位算的不准，现在这里进行微调
+        // 是createAddress最后一位算的不准，现在这里进行微调
         checkOffset(this);
         nativeRange.setStart(this.startContainer, this.startOffset);
         nativeRange.setEnd(this.endContainer, this.endOffset);
@@ -1490,9 +1483,9 @@
      */
     scrollToView: function (win, offset) {
       win = win ? window : domUtils.getWindow(this.document);
-      var me = this,
-        span = me.document.createElement('span');
-      //trace:717
+      var me = this;
+      var span = me.document.createElement('span');
+      // trace:717
       span.innerHTML = '&nbsp;';
       me.cloneRange().insertNode(span);
       domUtils.scrollToView(span, win, offset);
@@ -1508,8 +1501,8 @@
      */
     inFillChar: function () {
       var start = this.startContainer;
-      if (this.collapsed && start.nodeType == 3
-        && start.nodeValue.replace(new RegExp('^' + domUtils.fillChar), '').length + 1 == start.nodeValue.length
+      if (this.collapsed && start.nodeType == 3 &&
+        start.nodeValue.replace(new RegExp('^' + domUtils.fillChar), '').length + 1 == start.nodeValue.length
       ) {
         return true;
       }
@@ -1541,14 +1534,14 @@
      * ```
      */
     createAddress: function (ignoreEnd, ignoreTxt) {
-      var addr = {}, me = this;
+      var addr = {}; var me = this;
 
       function getAddress (isStart) {
         var node = isStart ? me.startContainer : me.endContainer;
         var parents = domUtils.findParents(node, true, function (node) {
-            return !domUtils.isBody(node)
-          }),
-          addrs = [];
+          return !domUtils.isBody(node);
+        });
+        var addrs = [];
         for (var i = 0, ci; ci = parents[i++];) {
           addrs.push(domUtils.getNodeIndex(ci, ignoreTxt));
         }
@@ -1561,7 +1554,7 @@
               firstIndex += tmpNode.nodeValue.replace(fillCharReg, '').length;
               tmpNode = tmpNode.previousSibling;
             }
-            firstIndex += (isStart ? me.startOffset : me.endOffset)// - (fillCharReg.test(node.nodeValue) ? 1 : 0 )
+            firstIndex += (isStart ? me.startOffset : me.endOffset);// - (fillCharReg.test(node.nodeValue) ? 1 : 0 )
           } else {
             node = node.childNodes[isStart ? me.startOffset : me.endOffset];
             if (node) {
@@ -1585,9 +1578,8 @@
               }
             }
           }
-
         } else {
-          firstIndex = isStart ? domUtils.isFillChar(node) ? 0 : me.startOffset : me.endOffset
+          firstIndex = isStart ? domUtils.isFillChar(node) ? 0 : me.startOffset : me.endOffset;
         }
         if (firstIndex < 0) {
           firstIndex = 0;
@@ -1634,8 +1626,8 @@
       var me = this;
 
       function getNode (address, isStart) {
-        var tmpNode = me.document.body,
-          parentNode, offset;
+        var tmpNode = me.document.body;
+        var parentNode; var offset;
         for (var i = 0, ci, l = address.length; i < l; i++) {
           ci = address[i];
           parentNode = tmpNode;
@@ -1647,15 +1639,15 @@
         }
         if (isStart) {
           if (tmpNode) {
-            me.setStartBefore(tmpNode)
+            me.setStartBefore(tmpNode);
           } else {
-            me.setStart(parentNode, offset)
+            me.setStart(parentNode, offset);
           }
         } else {
           if (tmpNode) {
-            me.setEndBefore(tmpNode)
+            me.setEndBefore(tmpNode);
           } else {
-            me.setEnd(parentNode, offset)
+            me.setEnd(parentNode, offset);
           }
         }
       }
@@ -1674,12 +1666,10 @@
     equals: function (rng) {
       for (var p in this) {
         if (this.hasOwnProperty(p)) {
-          if (this[p] !== rng[p])
-            return false
+          if (this[p] !== rng[p]) { return false; }
         }
       }
       return true;
-
     },
 
     /**
@@ -1763,11 +1753,10 @@
      * ```
      */
     traversal: function (doFn, filterFn) {
-      if (this.collapsed)
-        return this;
-      var bookmark = this.createBookmark(),
-        end = bookmark.end,
-        current = domUtils.getNextDomNode(bookmark.start, false, filterFn);
+      if (this.collapsed) { return this; }
+      var bookmark = this.createBookmark();
+      var end = bookmark.end;
+      var current = domUtils.getNextDomNode(bookmark.start, false, filterFn);
       while (current && current !== end && (domUtils.getPosition(current, end) & domUtils.POSITION_PRECEDING)) {
         var tmpNode = domUtils.getNextDomNode(current, false, filterFn);
         doFn(current);

@@ -1,6 +1,5 @@
-//维护编辑器一下默认的不在插件中的配置项
+// 维护编辑器一下默认的不在插件中的配置项
 UE.Editor.defaultOptions = function (editor) {
-
   var _url = editor.options.UEDITOR_HOME_URL;
   return {
     isShow: true,
@@ -27,5 +26,5 @@ UE.Editor.defaultOptions = function (editor) {
     tableNativeEditInFF: false,
     autoSyncData: true,
     fileNameFormat: '{time}{rand:6}'
-  }
+  };
 };

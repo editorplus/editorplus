@@ -4,76 +4,69 @@
  * @author robbenmu
  */
 
-UE.plugins.xssFilter = function() {
+UE.plugins.xssFilter = function () {
+  var config = UEDITOR_CONFIG;
+  var whitList = config.whitList;
 
-	var config = UEDITOR_CONFIG;
-	var whitList = config.whitList;
+  function filter (node) {
+    var tagName = node.tagName;
+    var attrs = node.attrs;
 
-	function filter(node) {
+    if (!whitList.hasOwnProperty(tagName)) {
+      node.parentNode.removeChild(node);
+      return false;
+    }
 
-		var tagName = node.tagName;
-		var attrs = node.attrs;
+    UE.utils.each(attrs, function (val, key) {
+      if (whitList[tagName].indexOf(key) === -1) {
+        node.setAttr(key);
+      }
+    });
+  }
 
-		if (!whitList.hasOwnProperty(tagName)) {
-			node.parentNode.removeChild(node);
-			return false;
-		}
+  // 添加inserthtml\paste等操作用的过滤规则
+  if (whitList && config.xssFilterRules) {
+    this.options.filterRules = (function () {
+      var result = {};
 
-		UE.utils.each(attrs, function (val, key) {
+      UE.utils.each(whitList, function (val, key) {
+        result[key] = function (node) {
+          return filter(node);
+        };
+      });
 
-			if (whitList[tagName].indexOf(key) === -1) {
-				node.setAttr(key);
-			}
-		});
-	}
+      return result;
+    }());
+  }
 
-	// 添加inserthtml\paste等操作用的过滤规则
-	if (whitList && config.xssFilterRules) {
-		this.options.filterRules = function () {
+  var tagList = [];
 
-			var result = {};
+  UE.utils.each(whitList, function (val, key) {
+    tagList.push(key);
+  });
 
-			UE.utils.each(whitList, function(val, key) {
-				result[key] = function (node) {
-					return filter(node);
-				};
-			});
-
-			return result;
-		}();
-	}
-
-	var tagList = [];
-
-	UE.utils.each(whitList, function (val, key) {
-		tagList.push(key);
-	});
-
-	// 添加input过滤规则
-	//
-	if (whitList && config.inputXssFilter) {
-		this.addInputRule(function (root) {
-
-			root.traversal(function(node) {
-				if (node.type !== 'element') {
-					return false;
-				}
-				filter(node);
-			});
-		});
-	}
-	// 添加output过滤规则
-	//
-	if (whitList && config.outputXssFilter) {
-		this.addOutputRule(function (root) {
-
-			root.traversal(function(node) {
-				if (node.type !== 'element') {
-					return false;
-				}
-				filter(node);
-			});
-		});
-	}
-
+  // 添加input过滤规则
+  //
+  if (whitList && config.inputXssFilter) {
+    this.addInputRule(function (root) {
+      root.traversal(function (node) {
+        if (node.type !== 'element') {
+          return false;
+        }
+        filter(node);
+      });
+    });
+  }
+  // 添加output过滤规则
+  //
+  if (whitList && config.outputXssFilter) {
+    this.addOutputRule(function (root) {
+      root.traversal(function (node) {
+        if (node.type !== 'element') {
+          return false;
+        }
+        filter(node);
+      });
+    });
+  }
 };

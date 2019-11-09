@@ -1,75 +1,71 @@
 (function () {
-    var parent = window.parent;
-    //dialog对象
-    dialog = parent.$EDITORUI[window.frameElement.id.replace( /_iframe$/, '' )];
-    //当前打开dialog的编辑器实例
-    editor = dialog.editor;
+  var parent = window.parent;
+  // dialog对象
+  dialog = parent.$EDITORUI[window.frameElement.id.replace(/_iframe$/, '')];
+  // 当前打开dialog的编辑器实例
+  editor = dialog.editor;
 
-    UE = parent.UE;
+  UE = parent.UE;
 
-    domUtils = UE.dom.domUtils;
+  domUtils = UE.dom.domUtils;
 
-    utils = UE.utils;
+  utils = UE.utils;
 
-    browser = UE.browser;
+  browser = UE.browser;
 
-    ajax = UE.ajax;
+  ajax = UE.ajax;
 
-    $G = function ( id ) {
-        return document.getElementById( id )
-    };
-    //focus元素
-    $focus = function ( node ) {
-        setTimeout( function () {
-          node.focus()
-        }, 0 )
-    };
-    utils.loadFile(document,{
-        href:"https://cdn.jsdelivr.net/npm/editorplus-themedefault@2.0.0/dist/dialogbase.css",
-        tag:"link",
-        type:"text/css",
-        rel:"stylesheet"
-    });
-    lang = editor.getLang(dialog.className.split( "-" )[2]);
-    if(lang){
-        domUtils.on(window,'load',function () {
-
-            var langImgPath = editor.options.langPath + editor.options.lang + "/images/";
-            //针对静态资源
-            for ( var i in lang["static"] ) {
-                var dom = $G( i );
-                if(!dom) continue;
-                var tagName = dom.tagName,
-                    content = lang["static"][i];
-                if(content.src){
-                    //clone
-                    content = utils.extend({},content,false);
-                    content.src = langImgPath + content.src;
-                }
-                if(content.style){
-                    content = utils.extend({},content,false);
-                    content.style = content.style.replace(/url\s*\(/g,"url(" + langImgPath)
-                }
-                switch ( tagName.toLowerCase() ) {
-                    case "var":
-                        dom.parentNode.replaceChild( document.createTextNode( content ), dom );
-                        break;
-                    case "select":
-                        var ops = dom.options;
-                        for ( var j = 0, oj; oj = ops[j]; ) {
-                            oj.innerHTML = content.options[j++];
-                        }
-                        for ( var p in content ) {
-                            p != "options" && dom.setAttribute( p, content[p] );
-                        }
-                        break;
-                    default :
-                        domUtils.setAttributes( dom, content);
-                }
+  $G = function (id) {
+    return document.getElementById(id);
+  };
+  // focus元素
+  $focus = function (node) {
+    setTimeout(function () {
+      node.focus();
+    }, 0);
+  };
+  utils.loadFile(document, {
+    href: 'https://cdn.jsdelivr.net/npm/editorplus-themedefault@2.0.0/dist/dialogbase.css',
+    tag: 'link',
+    type: 'text/css',
+    rel: 'stylesheet'
+  });
+  lang = editor.getLang(dialog.className.split('-')[2]);
+  if (lang) {
+    domUtils.on(window, 'load', function () {
+      var langImgPath = editor.options.langPath + editor.options.lang + '/images/';
+      // 针对静态资源
+      for (var i in lang.static) {
+        var dom = $G(i);
+        if (!dom) continue;
+        var tagName = dom.tagName;
+        var content = lang.static[i];
+        if (content.src) {
+          // clone
+          content = utils.extend({}, content, false);
+          content.src = langImgPath + content.src;
+        }
+        if (content.style) {
+          content = utils.extend({}, content, false);
+          content.style = content.style.replace(/url\s*\(/g, 'url(' + langImgPath);
+        }
+        switch (tagName.toLowerCase()) {
+          case 'var':
+            dom.parentNode.replaceChild(document.createTextNode(content), dom);
+            break;
+          case 'select':
+            var ops = dom.options;
+            for (var j = 0, oj; oj = ops[j];) {
+              oj.innerHTML = content.options[j++];
             }
-        } );
-    }
-
-
+            for (var p in content) {
+              p != 'options' && dom.setAttribute(p, content[p]);
+            }
+            break;
+          default :
+            domUtils.setAttributes(dom, content);
+        }
+      }
+    });
+  }
 })();
-

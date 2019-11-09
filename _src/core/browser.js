@@ -2,7 +2,7 @@
  * 提供浏览器检测的模块
  * @module UE.browser
  */
-var browser = UE.browser = function () {
+var browser = UE.browser = (function () {
   /**
    * @see https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
    * @type {{
@@ -19,7 +19,7 @@ var browser = UE.browser = function () {
     webkit: navigator.userAgent.indexOf(' AppleWebKit/') > -1,
     gecko: typeof window.InstallTrigger !== 'undefined',
     mac: navigator.userAgent.indexOf('Macintosh') > -1,
-    quirks: document.compatMode === 'BackCompat', // 检测当前浏览器是否处于“怪异模式”下
+    quirks: document.compatMode === 'BackCompat' // 检测当前浏览器是否处于“怪异模式”下
   };
 
   /**
@@ -38,7 +38,7 @@ var browser = UE.browser = function () {
   }
 
   if (/\s+Chrome\/(\d+\.\d)/i.test(navigator.userAgent)) {
-    browser.chrome = +RegExp["\x241"]; // $1 to number, 返回主版本号
+    browser.chrome = +RegExp.$1; // $1 to number, 返回主版本号
   }
 
   if (browser.webkit) {
@@ -68,10 +68,9 @@ var browser = UE.browser = function () {
   }
 
   return browser;
-}();
+}());
 
 // 快捷方式
 var ie = false;
 var webkit = browser.webkit;
 var gecko = browser.gecko;
-

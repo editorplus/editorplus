@@ -8,7 +8,6 @@
  * @module UE
  */
 
-
 /**
  * 根据传入节点和过滤规则过滤相应节点
  * @module UE
@@ -21,7 +20,7 @@
  * UE.filterNode(root,editor.options.filterRules);
  * ```
  */
-var filterNode = UE.filterNode = function () {
+var filterNode = UE.filterNode = (function () {
   function filterNode (node, rules) {
     switch (node.type) {
       case 'text':
@@ -30,10 +29,10 @@ var filterNode = UE.filterNode = function () {
         var val;
         if (val = rules[node.tagName]) {
           if (val === '-') {
-            node.parentNode.removeChild(node)
+            node.parentNode.removeChild(node);
           } else if (utils.isFunction(val)) {
-            var parentNode = node.parentNode,
-              index = node.getIndex();
+            var parentNode = node.parentNode;
+            var index = node.getIndex();
             val(node);
             if (node.parentNode) {
               if (node.children) {
@@ -52,15 +51,13 @@ var filterNode = UE.filterNode = function () {
                 }
               }
             }
-
-
           } else {
-            var attrs = val['$'];
+            var attrs = val.$;
             if (attrs && node.attrs) {
-              var tmpAttrs = {}, tmpVal;
+              var tmpAttrs = {}; var tmpVal;
               for (var a in attrs) {
                 tmpVal = node.getAttr(a);
-                //todo 只先对style单独处理
+                // todo 只先对style单独处理
                 if (a == 'style' && utils.isArray(attrs[a])) {
                   var tmpCssStyle = [];
                   utils.each(attrs[a], function (v) {
@@ -69,12 +66,11 @@ var filterNode = UE.filterNode = function () {
                       tmpCssStyle.push(v + ':' + tmp);
                     }
                   });
-                  tmpVal = tmpCssStyle.join(';')
+                  tmpVal = tmpCssStyle.join(';');
                 }
                 if (tmpVal) {
                   tmpAttrs[a] = tmpVal;
                 }
-
               }
               node.attrs = tmpAttrs;
             }
@@ -88,12 +84,12 @@ var filterNode = UE.filterNode = function () {
             }
           }
         } else {
-          //如果不在名单里扣出子节点并删除该节点,cdata除外
+          // 如果不在名单里扣出子节点并删除该节点,cdata除外
           if (dtd.$cdata[node.tagName]) {
-            node.parentNode.removeChild(node)
+            node.parentNode.removeChild(node);
           } else {
-            var parentNode = node.parentNode,
-              index = node.getIndex();
+            var parentNode = node.parentNode;
+            var index = node.getIndex();
             node.parentNode.removeChild(node, true);
             for (var i = index, ci; ci = parentNode.children[i];) {
               filterNode(ci, rules);
@@ -105,9 +101,8 @@ var filterNode = UE.filterNode = function () {
         }
         break;
       case 'comment':
-        node.parentNode.removeChild(node)
+        node.parentNode.removeChild(node);
     }
-
   }
 
   return function (root, rules) {
@@ -117,8 +112,8 @@ var filterNode = UE.filterNode = function () {
     var val;
     if (val = rules['-']) {
       utils.each(val.split(' '), function (k) {
-        rules[k] = '-'
-      })
+        rules[k] = '-';
+      });
     }
     for (var i = 0, ci; ci = root.children[i];) {
       filterNode(ci, rules);
@@ -127,5 +122,5 @@ var filterNode = UE.filterNode = function () {
       }
     }
     return root;
-  }
-}();
+  };
+}());

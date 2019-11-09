@@ -13,21 +13,20 @@
  * @class Selection
  */
 (function () {
-
   function getBoundaryInformation (range, start) {
     var getIndex = domUtils.getNodeIndex;
     range = range.duplicate();
     range.collapse(start);
     var parent = range.parentElement();
-    //如果节点里没有子节点，直接退出
+    // 如果节点里没有子节点，直接退出
     if (!parent.hasChildNodes()) {
-      return {container: parent, offset: 0};
+      return { container: parent, offset: 0 };
     }
-    var siblings = parent.children,
-      child,
-      testRange = range.duplicate(),
-      startIndex = 0, endIndex = siblings.length - 1, index = -1,
-      distance;
+    var siblings = parent.children;
+    var child;
+    var testRange = range.duplicate();
+    var startIndex = 0; var endIndex = siblings.length - 1; var index = -1;
+    var distance;
     while (startIndex <= endIndex) {
       index = Math.floor((startIndex + endIndex) / 2);
       child = siblings[index];
@@ -38,8 +37,8 @@
       } else if (position < 0) {
         startIndex = index + 1;
       } else {
-        //trace:1043
-        return {container: parent, offset: getIndex(child)};
+        // trace:1043
+        return { container: parent, offset: getIndex(child) };
       }
     }
     if (index == -1) {
@@ -49,22 +48,22 @@
       siblings = parent.childNodes;
       if (!distance) {
         child = siblings[siblings.length - 1];
-        return {container: child, offset: child.nodeValue.length};
+        return { container: child, offset: child.nodeValue.length };
       }
 
       var i = siblings.length;
       while (distance > 0) {
         distance -= siblings[--i].nodeValue.length;
       }
-      return {container: siblings[i], offset: -distance};
+      return { container: siblings[i], offset: -distance };
     }
     testRange.collapse(position > 0);
     testRange.setEndPoint(position > 0 ? 'StartToStart' : 'EndToStart', range);
     distance = testRange.text.replace(/(\r\n|\r)/g, '\n').length;
     if (!distance) {
-      return dtd.$empty[child.tagName] || dtd.$nonChild[child.tagName] ?
-        {container: parent, offset: getIndex(child) + (position > 0 ? 0 : 1)} :
-        {container: child, offset: position > 0 ? 0 : child.childNodes.length}
+      return dtd.$empty[child.tagName] || dtd.$nonChild[child.tagName]
+        ? { container: parent, offset: getIndex(child) + (position > 0 ? 0 : 1) }
+        : { container: child, offset: position > 0 ? 0 : child.childNodes.length };
     }
     while (distance > 0) {
       try {
@@ -72,10 +71,10 @@
         child = child[position > 0 ? 'previousSibling' : 'nextSibling'];
         distance -= child.nodeValue.length;
       } catch (e) {
-        return {container: parent, offset: getIndex(pre)};
+        return { container: parent, offset: getIndex(pre) };
       }
     }
-    return {container: child, offset: position > 0 ? -distance : child.nodeValue.length + distance}
+    return { container: child, offset: position > 0 ? -distance : child.nodeValue.length + distance };
   }
 
   /**
@@ -105,7 +104,7 @@
    */
   function _getIERange (sel) {
     var ieRange;
-    //ie下有可能报错
+    // ie下有可能报错
     try {
       ieRange = sel.getNative().createRange();
     } catch (e) {
@@ -119,7 +118,7 @@
   }
 
   var Selection = dom.Selection = function (doc) {
-    var me = this, iframe;
+    var me = this; var iframe;
     me.document = doc;
     iframe = doc = null;
   };
@@ -195,7 +194,7 @@
       }
       var start = this.getStart();
       if (start) {
-        return domUtils.findParents(start, true, null, true)
+        return domUtils.findParents(start, true, null, true);
       }
       return [];
     },
@@ -233,14 +232,14 @@
       var me = this;
 
       function optimze (range) {
-        var child = me.document.body.firstChild,
-          collapsed = range.collapsed;
+        var child = me.document.body.firstChild;
+        var collapsed = range.collapsed;
         while (child && child.firstChild) {
           range.setStart(child, 0);
           child = child.firstChild;
         }
         if (!range.startContainer) {
-          range.setStart(me.document.body, 0)
+          range.setStart(me.document.body, 0);
         }
         if (collapsed) {
           range.collapse(true);
@@ -261,7 +260,7 @@
           optimze(range);
         }
       } else {
-        //trace:1734 有可能已经不在dom树上了，标识的节点
+        // trace:1734 有可能已经不在dom树上了，标识的节点
         if (this._bakRange && domUtils.inDoc(this._bakRange.startContainer, this.document)) {
           return this._bakRange;
         }
@@ -284,18 +283,18 @@
       if (this._cachedStartElement) {
         return this._cachedStartElement;
       }
-      var range = this.getRange(),
-        tmpRange,
-        start, tmp, parent;
+      var range = this.getRange();
+      var tmpRange;
+      var start; var tmp; var parent;
 
-        range.shrinkBoundary();
-        start = range.startContainer;
-        if (start.nodeType == 1 && start.hasChildNodes()) {
-          start = start.childNodes[Math.min(start.childNodes.length - 1, range.startOffset)];
-        }
-        if (start.nodeType == 3) {
-          return start.parentNode;
-        }
+      range.shrinkBoundary();
+      start = range.startContainer;
+      if (start.nodeType == 1 && start.hasChildNodes()) {
+        start = start.childNodes[Math.min(start.childNodes.length - 1, range.startOffset)];
+      }
+      if (start.nodeType == 3) {
+        return start.parentNode;
+      }
 
       return start;
     },
@@ -327,7 +326,7 @@
      * ```
      */
     clearRange: function () {
-      this.getNative()['removeAllRanges']();
+      this.getNative().removeAllRanges();
     }
   };
 })();

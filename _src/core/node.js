@@ -13,7 +13,6 @@
  */
 
 (function () {
-
   /**
    * 编辑器模拟的节点类
    * @unfile
@@ -44,11 +43,11 @@
   };
 
   var notTransAttrs = {
-    'href': 1,
-    'src': 1,
-    '_src': 1,
-    '_href': 1,
-    'cdata_data': 1
+    href: 1,
+    src: 1,
+    _src: 1,
+    _href: 1,
+    cdata_data: 1
   };
 
   var notTransTagName = {
@@ -56,8 +55,8 @@
     script: 1
   };
 
-  var indentChar = '    ',
-    breakChar = '\n';
+  var indentChar = '    ';
+  var breakChar = '\n';
 
   function insertLine (arr, current, begin) {
     arr.push(breakChar);
@@ -65,42 +64,42 @@
   }
 
   function insertIndent (arr, current) {
-    //插入缩进
+    // 插入缩进
     for (var i = 0; i < current; i++) {
       arr.push(indentChar);
     }
   }
 
-  //创建uNode的静态方法
-  //支持标签和html
+  // 创建uNode的静态方法
+  // 支持标签和html
   uNode.createElement = function (html) {
     if (/[<>]/.test(html)) {
-      return UE.htmlparser(html).children[0]
+      return UE.htmlparser(html).children[0];
     } else {
       return new uNode({
         type: 'element',
         children: [],
         tagName: html
-      })
+      });
     }
   };
   uNode.createText = function (data, noTrans) {
     return new UE.uNode({
       type: 'text',
-      'data': noTrans ? data : utils.unhtml(data || '')
-    })
+      data: noTrans ? data : utils.unhtml(data || '')
+    });
   };
 
   function nodeToHtml (node, arr, formatter, current) {
     switch (node.type) {
       case 'root':
         for (var i = 0, ci; ci = node.children[i++];) {
-          //插入新行
+          // 插入新行
           if (formatter && ci.type == 'element' && !dtd.$inlineWithA[ci.tagName] && i > 1) {
             insertLine(arr, current, true);
-            insertIndent(arr, current)
+            insertIndent(arr, current);
           }
-          nodeToHtml(ci, arr, formatter, current)
+          nodeToHtml(ci, arr, formatter, current);
         }
         break;
       case 'text':
@@ -117,12 +116,11 @@
 
   function isText (node, arr) {
     if (node.parentNode.tagName == 'pre') {
-      //源码模式下输入html标签，不能做转换处理，直接输出
-      arr.push(node.data)
+      // 源码模式下输入html标签，不能做转换处理，直接输出
+      arr.push(node.data);
     } else {
-      arr.push(notTransTagName[node.parentNode.tagName] ? utils.html(node.data) : node.data.replace(/[ ]{2}/g, ' &nbsp;'))
+      arr.push(notTransTagName[node.parentNode.tagName] ? utils.html(node.data) : node.data.replace(/[ ]{2}/g, ' &nbsp;'));
     }
-
   }
 
   function isElement (node, arr, formatter, current) {
@@ -131,13 +129,13 @@
       attrhtml = [];
       var attrs = node.attrs;
       for (var a in attrs) {
-        //这里就针对
-        //<p>'<img src='https://nsclick.baidu.com/u.gif?&asdf=\"sdf&asdfasdfs;asdf'></p>
-        //这里边的\"做转换，要不用innerHTML直接被截断了，属性src
-        //有可能做的不够
+        // 这里就针对
+        // <p>'<img src='https://nsclick.baidu.com/u.gif?&asdf=\"sdf&asdfasdfs;asdf'></p>
+        // 这里边的\"做转换，要不用innerHTML直接被截断了，属性src
+        // 有可能做的不够
         attrhtml.push(a + (attrs[a] !== undefined ? '="' + (notTransAttrs[a] ? utils.html(attrs[a]).replace(/["]/g, function (a) {
-          return '&quot;'
-        }) : utils.unhtml(attrs[a])) + '"' : ''))
+          return '&quot;';
+        }) : utils.unhtml(attrs[a])) + '"' : ''));
       }
       attrhtml = attrhtml.join(' ');
     }
@@ -145,34 +143,31 @@
       (attrhtml ? ' ' + attrhtml : '') +
       (dtd.$empty[node.tagName] ? '\/' : '') + '>'
     );
-    //插入新行
+    // 插入新行
     if (formatter && !dtd.$inlineWithA[node.tagName] && node.tagName != 'pre') {
       if (node.children && node.children.length) {
         current = insertLine(arr, current, true);
-        insertIndent(arr, current)
+        insertIndent(arr, current);
       }
-
     }
     if (node.children && node.children.length) {
       for (var i = 0, ci; ci = node.children[i++];) {
         if (formatter && ci.type == 'element' && !dtd.$inlineWithA[ci.tagName] && i > 1) {
           insertLine(arr, current);
-          insertIndent(arr, current)
+          insertIndent(arr, current);
         }
-        nodeToHtml(ci, arr, formatter, current)
+        nodeToHtml(ci, arr, formatter, current);
       }
     }
     if (!dtd.$empty[node.tagName]) {
       if (formatter && !dtd.$inlineWithA[node.tagName] && node.tagName != 'pre') {
-
         if (node.children && node.children.length) {
           current = insertLine(arr, current);
-          insertIndent(arr, current)
+          insertIndent(arr, current);
         }
       }
       arr.push('<\/' + node.tagName + '>');
     }
-
   }
 
   function isComment (node, arr) {
@@ -199,7 +194,7 @@
     }
     if (node.children && node.children.length) {
       for (var i = 0, ci; ci = node.children[i++];) {
-        getNodesByTagName(ci, tagName, arr)
+        getNodesByTagName(ci, tagName, arr);
       }
     }
   }
@@ -208,18 +203,17 @@
     if (root.children && root.children.length) {
       for (var i = 0, ci; ci = root.children[i];) {
         nodeTraversal(ci, fn);
-        //ci被替换的情况，这里就不再走 fn了
+        // ci被替换的情况，这里就不再走 fn了
         if (ci.parentNode) {
           if (ci.children && ci.children.length) {
-            fn(ci)
+            fn(ci);
           }
-          if (ci.parentNode) i++
+          if (ci.parentNode) i++;
         }
       }
     } else {
-      fn(root)
+      fn(root);
     }
-
   }
 
   uNode.prototype = {
@@ -247,7 +241,7 @@
     toHtml: function (formatter) {
       var arr = [];
       nodeToHtml(this, arr, formatter, 0);
-      return arr.join('')
+      return arr.join('');
     },
 
     /**
@@ -348,9 +342,8 @@
      * ```
      */
     getData: function () {
-      if (this.type == 'element')
-        return '';
-      return this.data
+      if (this.type == 'element') { return ''; }
+      return this.data;
     },
 
     /**
@@ -363,9 +356,9 @@
      * ```
      */
     firstChild: function () {
-//            if (this.type != 'element' || dtd.$empty[this.tagName]) {
-//                return this;
-//            }
+      //            if (this.type != 'element' || dtd.$empty[this.tagName]) {
+      //                return this;
+      //            }
       return this.children ? this.children[0] : null;
     },
 
@@ -379,9 +372,9 @@
      * ```
      */
     lastChild: function () {
-//            if (this.type != 'element' || dtd.$empty[this.tagName] ) {
-//                return this;
-//            }
+      //            if (this.type != 'element' || dtd.$empty[this.tagName] ) {
+      //                return this;
+      //            }
       return this.children ? this.children[this.children.length - 1] : null;
     },
 
@@ -401,7 +394,6 @@
           return i == 0 ? null : parent.children[i - 1];
         }
       }
-
     },
 
     /**
@@ -462,7 +454,7 @@
     appendChild: function (node) {
       if (this.type == 'root' || (this.type == 'element' && !dtd.$empty[this.tagName])) {
         if (!this.children) {
-          this.children = []
+          this.children = [];
         }
         if (node.parentNode) {
           node.parentNode.removeChild(node);
@@ -477,8 +469,6 @@
         node.parentNode = this;
         return node;
       }
-
-
     },
 
     /**
@@ -504,7 +494,6 @@
             return target;
           }
         }
-
       }
     },
 
@@ -530,7 +519,6 @@
             target.parentNode = this;
             return target;
           }
-
         }
       }
     },
@@ -556,7 +544,6 @@
               for (var j = 0, cj; cj = ci.children[j]; j++) {
                 this.children.splice(i + j, 0, cj);
                 cj.parentNode = this;
-
               }
             }
             return ci;
@@ -576,7 +563,7 @@
      * ```
      */
     getAttr: function (attrName) {
-      return this.attrs && this.attrs[attrName.toLowerCase()]
+      return this.attrs && this.attrs[attrName.toLowerCase()];
     },
 
     /**
@@ -601,18 +588,17 @@
       if (utils.isObject(attrName)) {
         for (var a in attrName) {
           if (!attrName[a]) {
-            delete this.attrs[a]
+            delete this.attrs[a];
           } else {
             this.attrs[a.toLowerCase()] = attrName[a];
           }
         }
       } else {
         if (!attrVal) {
-          delete this.attrs[attrName]
+          delete this.attrs[attrName];
         } else {
           this.attrs[attrName.toLowerCase()] = attrVal;
         }
-
       }
     },
 
@@ -668,11 +654,11 @@
      */
     getNodesByTagName: function (tagNames) {
       tagNames = utils.trim(tagNames).replace(/[ ]{2,}/g, ' ').split(' ');
-      var arr = [], me = this;
+      var arr = []; var me = this;
       utils.each(tagNames, function (tagName) {
         if (me.children && me.children.length) {
           for (var i = 0, ci; ci = me.children[i++];) {
-            getNodesByTagName(ci, tagName, arr)
+            getNodesByTagName(ci, tagName, arr);
           }
         }
       });
@@ -692,12 +678,12 @@
     getStyle: function (name) {
       var cssStyle = this.getAttr('style');
       if (!cssStyle) {
-        return ''
+        return '';
       }
       var reg = new RegExp('(^|;)\\s*' + name + ':([^;]+)', 'i');
       var match = cssStyle.match(reg);
       if (match && match[0]) {
-        return match[2]
+        return match[2];
       }
       return '';
     },
@@ -717,9 +703,8 @@
         var reg = new RegExp('(^|;)\\s*' + name + ':([^;]+;?)', 'gi');
         cssStyle = cssStyle.replace(reg, '$1');
         if (val) {
-          cssStyle = name + ':' + utils.unhtml(val) + ';' + cssStyle
+          cssStyle = name + ':' + utils.unhtml(val) + ';' + cssStyle;
         }
-
       }
 
       var cssStyle = this.getAttr('style');
@@ -728,12 +713,12 @@
       }
       if (utils.isObject(name)) {
         for (var a in name) {
-          exec(a, name[a])
+          exec(a, name[a]);
         }
       } else {
-        exec(name, val)
+        exec(name, val);
       }
-      this.setAttr('style', utils.trim(cssStyle))
+      this.setAttr('style', utils.trim(cssStyle));
     },
 
     /**
@@ -753,5 +738,5 @@
       }
       return this;
     }
-  }
+  };
 })();

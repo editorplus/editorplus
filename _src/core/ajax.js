@@ -8,22 +8,20 @@
  * 提供对ajax请求的支持
  * @module UE.ajax
  */
-UE.ajax = function () {
-
-  //创建一个ajaxRequest对象
+UE.ajax = (function () {
+  // 创建一个ajaxRequest对象
   var fnStr = 'XMLHttpRequest()';
   try {
-    new ActiveXObject("Msxml2.XMLHTTP");
+    new ActiveXObject('Msxml2.XMLHTTP');
     fnStr = 'ActiveXObject(\'Msxml2.XMLHTTP\')';
   } catch (e) {
     try {
-      new ActiveXObject("Microsoft.XMLHTTP");
-      fnStr = 'ActiveXObject(\'Microsoft.XMLHTTP\')'
+      new ActiveXObject('Microsoft.XMLHTTP');
+      fnStr = 'ActiveXObject(\'Microsoft.XMLHTTP\')';
     } catch (e) {
     }
   }
   var creatAjaxRequest = new Function('return new ' + fnStr);
-
 
   /**
    * 将json参数转化成适合ajax提交的参数列表
@@ -32,52 +30,52 @@ UE.ajax = function () {
   function json2str (json) {
     var strArr = [];
     for (var i in json) {
-      //忽略默认的几个参数
-      if (i == "method" || i == "timeout" || i == "async" || i == "dataType" || i == "callback") continue;
-      //忽略控制
+      // 忽略默认的几个参数
+      if (i == 'method' || i == 'timeout' || i == 'async' || i == 'dataType' || i == 'callback') continue;
+      // 忽略控制
       if (json[i] == undefined || json[i] == null) continue;
-      //传递过来的对象和函数不在提交之列
-      if (!((typeof json[i]).toLowerCase() == "function" || (typeof json[i]).toLowerCase() == "object")) {
-        strArr.push(encodeURIComponent(i) + "=" + encodeURIComponent(json[i]));
+      // 传递过来的对象和函数不在提交之列
+      if (!((typeof json[i]).toLowerCase() == 'function' || (typeof json[i]).toLowerCase() == 'object')) {
+        strArr.push(encodeURIComponent(i) + '=' + encodeURIComponent(json[i]));
       } else if (utils.isArray(json[i])) {
-        //支持传数组内容
+        // 支持传数组内容
         for (var j = 0; j < json[i].length; j++) {
-          strArr.push(encodeURIComponent(i) + "[]=" + encodeURIComponent(json[i][j]));
+          strArr.push(encodeURIComponent(i) + '[]=' + encodeURIComponent(json[i][j]));
         }
       }
     }
-    return strArr.join("&");
+    return strArr.join('&');
   }
 
   function doAjax (url, ajaxOptions) {
-    var xhr = creatAjaxRequest(),
-      //是否超时
-      timeIsOut = false,
-      //默认参数
-      defaultAjaxOptions = {
-        method: "POST",
-        timeout: 5000,
-        async: true,
-        data: {},//需要传递对象的话只能覆盖
-        onsuccess: function () {
-        },
-        onerror: function () {
-        }
-      };
+    var xhr = creatAjaxRequest();
+    // 是否超时
+    var timeIsOut = false;
+    // 默认参数
+    var defaultAjaxOptions = {
+      method: 'POST',
+      timeout: 5000,
+      async: true,
+      data: {}, // 需要传递对象的话只能覆盖
+      onsuccess: function () {
+      },
+      onerror: function () {
+      }
+    };
 
-    if (typeof url === "object") {
+    if (typeof url === 'object') {
       ajaxOptions = url;
       url = ajaxOptions.url;
     }
     if (!xhr || !url) return;
     var ajaxOpts = ajaxOptions ? utils.extend(defaultAjaxOptions, ajaxOptions) : defaultAjaxOptions;
 
-    var submitStr = json2str(ajaxOpts);  // { name:"Jim",city:"Beijing" } --> "name=Jim&city=Beijing"
-    //如果用户直接通过data参数传递json对象过来，则也要将此json对象转化为字符串
+    var submitStr = json2str(ajaxOpts); // { name:"Jim",city:"Beijing" } --> "name=Jim&city=Beijing"
+    // 如果用户直接通过data参数传递json对象过来，则也要将此json对象转化为字符串
     if (!utils.isEmptyObject(ajaxOpts.data)) {
-      submitStr += (submitStr ? "&" : "") + json2str(ajaxOpts.data);
+      submitStr += (submitStr ? '&' : '') + json2str(ajaxOpts.data);
     }
-    //超时检测
+    // 超时检测
     var timerID = setTimeout(function () {
       if (xhr.readyState != 4) {
         timeIsOut = true;
@@ -87,7 +85,7 @@ UE.ajax = function () {
     }, ajaxOpts.timeout);
 
     var method = ajaxOpts.method.toUpperCase();
-    var str = url + (url.indexOf("?") == -1 ? "?" : "&") + (method == "POST" ? "" : submitStr + "&noCache=" + +new Date);
+    var str = url + (url.indexOf('?') == -1 ? '?' : '&') + (method == 'POST' ? '' : submitStr + '&noCache=' + +new Date());
     xhr.open(method, str, ajaxOpts.async);
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
@@ -98,7 +96,7 @@ UE.ajax = function () {
         }
       }
     };
-    if (method == "POST") {
+    if (method == 'POST') {
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.send(submitStr);
     } else {
@@ -107,18 +105,17 @@ UE.ajax = function () {
   }
 
   function doJsonp (url, opts) {
-
     var successhandler = opts.onsuccess || function () {
-      },
-      scr = document.createElement('SCRIPT'),
-      options = opts || {},
-      charset = options['charset'],
-      callbackField = options['jsonp'] || 'callback',
-      callbackFnName,
-      timeOut = options['timeOut'] || 0,
-      timer,
-      reg = new RegExp('(\\?|&)' + callbackField + '=([^&]*)'),
-      matches;
+    };
+    var scr = document.createElement('SCRIPT');
+    var options = opts || {};
+    var charset = options.charset;
+    var callbackField = options.jsonp || 'callback';
+    var callbackFnName;
+    var timeOut = options.timeOut || 0;
+    var timer;
+    var reg = new RegExp('(\\?|&)' + callbackField + '=([^&]*)');
+    var matches;
 
     if (utils.isFunction(successhandler)) {
       callbackFnName = 'bd__editor__' + Math.floor(Math.random() * 2147483648).toString(36);
@@ -137,10 +134,10 @@ UE.ajax = function () {
       url += (url.indexOf('?') < 0 ? '?' : '&') + callbackField + '=' + callbackFnName;
     }
 
-    var queryStr = json2str(opts);  // { name:"Jim",city:"Beijing" } --> "name=Jim&city=Beijing"
-    //如果用户直接通过data参数传递json对象过来，则也要将此json对象转化为字符串
+    var queryStr = json2str(opts); // { name:"Jim",city:"Beijing" } --> "name=Jim&city=Beijing"
+    // 如果用户直接通过data参数传递json对象过来，则也要将此json对象转化为字符串
     if (!utils.isEmptyObject(opts.data)) {
-      queryStr += (queryStr ? "&" : "") + json2str(opts.data);
+      queryStr += (queryStr ? '&' : '') + json2str(opts.data);
     }
     if (queryStr) {
       url = url.replace(/\?/, '?' + queryStr + '&');
@@ -183,7 +180,7 @@ UE.ajax = function () {
           } catch (e) {
           }
         }
-      }
+      };
     }
   }
 
@@ -254,12 +251,10 @@ UE.ajax = function () {
     },
     getJSONP: function (url, data, fn) {
       var opts = {
-        'data': data,
-        'oncomplete': fn
+        data: data,
+        oncomplete: fn
       };
       doJsonp(url, opts);
     }
   };
-
-
-}();
+}());

@@ -66,7 +66,7 @@ EventBase.prototype = {
     return this.addListener(types, listener);
   },
   off: function (types, listener) {
-    return this.removeListener(types, listener)
+    return this.removeListener(types, listener);
   },
   trigger: function () {
     return this.fireEvent.apply(this, arguments);
@@ -125,8 +125,8 @@ EventBase.prototype = {
     var types = arguments[0];
     types = utils.trim(types).split(' ');
     for (var i = 0, ti; ti = types[i++];) {
-      var listeners = getListener(this, ti),
-        r, t, k;
+      var listeners = getListener(this, ti);
+      var r; var t; var k;
       if (listeners) {
         k = listeners.length;
         while (k--) {
@@ -163,7 +163,6 @@ EventBase.prototype = {
 function getListener (obj, type, force) {
   var allListeners;
   type = type.toLowerCase();
-  return ((allListeners = (obj.__allListeners || force && (obj.__allListeners = {})))
-    && (allListeners[type] || force && (allListeners[type] = [])));
+  return ((allListeners = (obj.__allListeners || force && (obj.__allListeners = {}))) &&
+    (allListeners[type] || force && (allListeners[type] = [])));
 }
-

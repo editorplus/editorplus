@@ -55,14 +55,12 @@ var utils = UE.utils = {
     if (obj == null) return;
     if (obj.length === +obj.length) {
       for (var i = 0, l = obj.length; i < l; i++) {
-        if (iterator.call(context, obj[i], i, obj) === false)
-          return false;
+        if (iterator.call(context, obj[i], i, obj) === false) { return false; }
       }
     } else {
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
-          if (iterator.call(context, obj[key], key, obj) === false)
-            return false;
+          if (iterator.call(context, obj[key], key, obj) === false) { return false; }
         }
       }
     }
@@ -86,7 +84,7 @@ var utils = UE.utils = {
   makeInstance: function (obj) {
     var noop = new Function();
     noop.prototype = obj;
-    obj = new noop;
+    obj = new noop();
     noop.prototype = null;
     return obj;
   },
@@ -212,8 +210,8 @@ var utils = UE.utils = {
    * ```
    */
   inherits: function (subClass, superClass) {
-    var oldP = subClass.prototype,
-      newP = utils.makeInstance(superClass.prototype);
+    var oldP = subClass.prototype;
+    var newP = utils.makeInstance(superClass.prototype);
     utils.extend(newP, oldP, true);
     subClass.prototype = newP;
     return (newP.constructor = subClass);
@@ -469,9 +467,8 @@ var utils = UE.utils = {
           '"': '&quot;',
           '>': '&gt;',
           "'": '&#39;'
-        }[a]
+        }[a];
       }
-
     }) : '';
   },
   /**
@@ -488,8 +485,7 @@ var utils = UE.utils = {
         '"': '&quot;',
         '>': '&gt;',
         "'": '&#39;'
-      }[a]
-
+      }[a];
     }) : '';
   },
 
@@ -518,7 +514,7 @@ var utils = UE.utils = {
         '&gt;': '>',
         '&#39;': "'",
         '&nbsp;': ' '
-      }[m]
+      }[m];
     }) : '';
   },
 
@@ -537,18 +533,18 @@ var utils = UE.utils = {
    *
    * ```
    */
-  cssStyleToDomStyle: function () {
-    var test = document.createElement('div').style,
-      cache = {
-        'float': test.cssFloat != undefined ? 'cssFloat' : test.styleFloat != undefined ? 'styleFloat' : 'float'
-      };
+  cssStyleToDomStyle: (function () {
+    var test = document.createElement('div').style;
+    var cache = {
+      float: test.cssFloat != undefined ? 'cssFloat' : test.styleFloat != undefined ? 'styleFloat' : 'float'
+    };
 
     return function (cssName) {
       return cache[cssName] || (cache[cssName] = cssName.toLowerCase().replace(/-./g, function (match) {
         return match.charAt(1).toUpperCase();
       }));
     };
-  }(),
+  }()),
 
   /**
    * 动态加载文件到doc中
@@ -590,7 +586,7 @@ var utils = UE.utils = {
    *
    * ```
    */
-  loadFile: function () {
+  loadFile: (function () {
     var tmpList = [];
 
     function getItem (doc, obj) {
@@ -603,7 +599,6 @@ var utils = UE.utils = {
       } catch (e) {
         return null;
       }
-
     }
 
     return function (doc, obj, fn) {
@@ -612,7 +607,7 @@ var utils = UE.utils = {
         if (item.ready) {
           fn && fn();
         } else {
-          item.funs.push(fn)
+          item.funs.push(fn);
         }
         return;
       }
@@ -625,7 +620,7 @@ var utils = UE.utils = {
         var html = [];
         for (var p in obj) {
           if (p == 'tag') continue;
-          html.push(p + '="' + obj[p] + '"')
+          html.push(p + '="' + obj[p] + '"');
         }
         doc.write('<' + obj.tag + ' ' + html.join(' ') + ' ></' + obj.tag + '>');
         return;
@@ -651,11 +646,11 @@ var utils = UE.utils = {
         }
       };
       element.onerror = function () {
-        throw Error('The load ' + (obj.href || obj.src) + ' fails,check the url settings of file ueditor.config.js ')
+        throw Error('The load ' + (obj.href || obj.src) + ' fails,check the url settings of file ueditor.config.js ');
       };
-      doc.getElementsByTagName("head")[0].appendChild(element);
-    }
-  }(),
+      doc.getElementsByTagName('head')[0].appendChild(element);
+    };
+  }()),
 
   /**
    * 判断obj对象是否为空
@@ -704,13 +699,12 @@ var utils = UE.utils = {
    */
   fixColor: function (name, value) {
     if (/color/i.test(name) && /rgba?/.test(value)) {
-      var array = value.split(",");
-      if (array.length > 3)
-        return "";
-      value = "#";
+      var array = value.split(',');
+      if (array.length > 3) { return ''; }
+      value = '#';
       for (var i = 0, color; color = array[i++];) {
         color = parseInt(color.replace(/[^\d]/gi, ''), 10).toString(16);
-        value += color.length == 1 ? "0" + color : color;
+        value += color.length == 1 ? '0' + color : color;
       }
       value = value.toUpperCase();
     }
@@ -746,16 +740,16 @@ var utils = UE.utils = {
       if (!obj) {
         return '';
       }
-      var t = obj.top, b = obj.bottom, l = obj.left, r = obj.right, val = '';
+      var t = obj.top; var b = obj.bottom; var l = obj.left; var r = obj.right; var val = '';
       if (!t || !l || !b || !r) {
         for (var p in obj) {
           val += ';' + name + '-' + p + ':' + obj[p] + ';';
         }
       } else {
         val += ';' + name + ':' +
-          (t == b && b == l && l == r ? t :
-            t == b && l == r ? (t + ' ' + l) :
-              l == r ? (t + ' ' + l + ' ' + b) : (t + ' ' + r + ' ' + b + ' ' + l)) + ';'
+          (t == b && b == l && l == r ? t
+            : t == b && l == r ? (t + ' ' + l)
+              : l == r ? (t + ' ' + l + ' ' + b) : (t + ' ' + r + ' ' + b + ' ' + l)) + ';';
       }
       return val;
     }
@@ -763,7 +757,7 @@ var utils = UE.utils = {
     val += opt(padding, 'padding') + opt(margin, 'margin');
     return val.replace(/^[ \n\r\t;]*|[ \n\r\t]*$/, '').replace(/;([ \n\r\t]+)|\1;/g, ';')
       .replace(/(&((l|g)t|quot|#39))?;{2,}/g, function (a, b) {
-        return b ? b + ";;" : ';'
+        return b ? b + ';;' : ';';
       });
   },
 
@@ -787,9 +781,9 @@ var utils = UE.utils = {
     for (var i in source) {
       if (source.hasOwnProperty(i)) {
         tmp = source[i];
-        if (typeof tmp == 'object') {
+        if (typeof tmp === 'object') {
           target[i] = utils.isArray(tmp) ? [] : {};
-          utils.clone(source[i], target[i])
+          utils.clone(source[i], target[i]);
         } else {
           target[i] = tmp;
         }
@@ -816,7 +810,7 @@ var utils = UE.utils = {
    */
   transUnitToPx: function (val) {
     if (!/(pt|cm)/.test(val)) {
-      return val
+      return val;
     }
     var unit;
     val.replace(/([\d.]+)(\w+)/, function (str, v, u) {
@@ -849,12 +843,11 @@ var utils = UE.utils = {
    *
    * ```
    */
-  domReady: function () {
-
+  domReady: (function () {
     var fnArr = [];
 
     function doReady (doc) {
-      //确保onready只执行一次
+      // 确保onready只执行一次
       doc.isReady = true;
       for (var ci; ci = fnArr.pop(); ci()) {
       }
@@ -864,22 +857,21 @@ var utils = UE.utils = {
       win = win || window;
       var doc = win.document;
       onready && fnArr.push(onready);
-      if (doc.readyState === "complete") {
+      if (doc.readyState === 'complete') {
         doReady(doc);
       } else {
         doc.isReady && doReady(doc);
 
-        doc.addEventListener("DOMContentLoaded", function () {
-          doc.removeEventListener("DOMContentLoaded", arguments.callee, false);
+        doc.addEventListener('DOMContentLoaded', function () {
+          doc.removeEventListener('DOMContentLoaded', arguments.callee, false);
           doReady(doc);
         }, false);
         win.addEventListener('load', function () {
-          doReady(doc)
+          doReady(doc);
         }, false);
       }
-
-    }
-  }(),
+    };
+  }()),
 
   /**
    * 动态添加css样式
@@ -894,7 +886,7 @@ var utils = UE.utils = {
   cssRule: function (key, style, doc) {
     var head, node;
     if (style === undefined || style && style.nodeType && style.nodeType == 9) {
-      //获取样式
+      // 获取样式
       doc = style && style.nodeType && style.nodeType == 9 ? style : (doc || document);
       node = doc.getElementById(key);
       return node ? node.innerHTML : undefined;
@@ -902,16 +894,16 @@ var utils = UE.utils = {
     doc = doc || document;
     node = doc.getElementById(key);
 
-    //清除样式
+    // 清除样式
     if (style === '') {
       if (node) {
         node.parentNode.removeChild(node);
-        return true
+        return true;
       }
       return false;
     }
 
-    //添加样式
+    // 添加样式
     if (node) {
       node.innerHTML = style;
     } else {
@@ -939,19 +931,19 @@ var utils = UE.utils = {
   serializeParam: function (json) {
     var strArr = [];
     for (var i in json) {
-      //忽略默认的几个参数
-      if (i == "method" || i == "timeout" || i == "async") continue;
-      //传递过来的对象和函数不在提交之列
-      if (!((typeof json[i]).toLowerCase() == "function" || (typeof json[i]).toLowerCase() == "object")) {
-        strArr.push(encodeURIComponent(i) + "=" + encodeURIComponent(json[i]));
+      // 忽略默认的几个参数
+      if (i == 'method' || i == 'timeout' || i == 'async') continue;
+      // 传递过来的对象和函数不在提交之列
+      if (!((typeof json[i]).toLowerCase() == 'function' || (typeof json[i]).toLowerCase() == 'object')) {
+        strArr.push(encodeURIComponent(i) + '=' + encodeURIComponent(json[i]));
       } else if (utils.isArray(json[i])) {
-        //支持传数组内容
+        // 支持传数组内容
         for (var j = 0; j < json[i].length; j++) {
-          strArr.push(encodeURIComponent(i) + "[]=" + encodeURIComponent(json[i][j]));
+          strArr.push(encodeURIComponent(i) + '[]=' + encodeURIComponent(json[i][j]));
         }
       }
     }
-    return strArr.join("&");
+    return strArr.join('&');
   },
   formatUrl: function (url) {
     var u = url.replace(/&&/g, '&');
@@ -970,37 +962,31 @@ var utils = UE.utils = {
   clearEmptyAttrs: function (obj) {
     for (var p in obj) {
       if (obj[p] === '') {
-        delete obj[p]
+        delete obj[p];
       }
     }
     return obj;
   },
   str2json: function (s) {
-
     if (!utils.isString(s)) return null;
     if (window.JSON) {
       return JSON.parse(s);
     } else {
-      return (new Function("return " + utils.trim(s || '')))();
+      return (new Function('return ' + utils.trim(s || '')))();
     }
-
   },
   json2str: (function () {
-
     if (window.JSON) {
-
       return JSON.stringify;
-
     } else {
-
       var escapeMap = {
-        "\b": '\\b',
-        "\t": '\\t',
-        "\n": '\\n',
-        "\f": '\\f',
-        "\r": '\\r',
+        '\b': '\\b',
+        '\t': '\\t',
+        '\n': '\\n',
+        '\f': '\\f',
+        '\r': '\\r',
         '"': '\\"',
-        "\\": '\\\\'
+        '\\': '\\\\'
       };
 
       function encodeString (source) {
@@ -1013,26 +999,26 @@ var utils = UE.utils = {
                 return c;
               }
               c = match.charCodeAt();
-              return "\\u00"
-                + Math.floor(c / 16).toString(16)
-                + (c % 16).toString(16);
+              return '\\u00' +
+                Math.floor(c / 16).toString(16) +
+                (c % 16).toString(16);
             });
         }
         return '"' + source + '"';
       }
 
       function encodeArray (source) {
-        var result = ["["],
-          l = source.length,
-          preComma, i, item;
+        var result = ['['];
+        var l = source.length;
+        var preComma; var i; var item;
 
         for (i = 0; i < l; i++) {
           item = source[i];
 
           switch (typeof item) {
-            case "undefined":
-            case "function":
-            case "unknown":
+            case 'undefined':
+            case 'function':
+            case 'unknown':
               break;
             default:
               if (preComma) {
@@ -1042,8 +1028,8 @@ var utils = UE.utils = {
               preComma = 1;
           }
         }
-        result.push("]");
-        return result.join("");
+        result.push(']');
+        return result.join('');
       }
 
       function pad (source) {
@@ -1051,12 +1037,12 @@ var utils = UE.utils = {
       }
 
       function encodeDate (source) {
-        return '"' + source.getFullYear() + "-"
-          + pad(source.getMonth() + 1) + "-"
-          + pad(source.getDate()) + "T"
-          + pad(source.getHours()) + ":"
-          + pad(source.getMinutes()) + ":"
-          + pad(source.getSeconds()) + '"';
+        return '"' + source.getFullYear() + '-' +
+          pad(source.getMonth() + 1) + '-' +
+          pad(source.getDate()) + 'T' +
+          pad(source.getHours()) + ':' +
+          pad(source.getMinutes()) + ':' +
+          pad(source.getSeconds()) + '"';
       }
 
       return function (value) {
@@ -1065,7 +1051,7 @@ var utils = UE.utils = {
             return 'undefined';
 
           case 'number':
-            return isFinite(value) ? String(value) : "null";
+            return isFinite(value) ? String(value) : 'null';
 
           case 'string':
             return encodeString(value);
@@ -1081,10 +1067,10 @@ var utils = UE.utils = {
             } else if (utils.isDate(value)) {
               return encodeDate(value);
             } else {
-              var result = ['{'],
-                encode = utils.json2str,
-                preComma,
-                item;
+              var result = ['{'];
+              var encode = utils.json2str;
+              var preComma;
+              var item;
 
               for (var key in value) {
                 if (Object.prototype.hasOwnProperty.call(value, key)) {
@@ -1109,7 +1095,6 @@ var utils = UE.utils = {
         }
       };
     }
-
   })()
 
 };
@@ -1157,5 +1142,5 @@ var utils = UE.utils = {
 utils.each(['String', 'Function', 'Array', 'Number', 'RegExp', 'Object', 'Date'], function (v) {
   UE.utils['is' + v] = function (obj) {
     return Object.prototype.toString.apply(obj) == '[object ' + v + ']';
-  }
+  };
 });
