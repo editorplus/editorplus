@@ -1,15 +1,16 @@
-UE.parse.register('list', function(utils) {
+UE.parse.register('list', function (utils) {
   var customCss = [],
     customStyle = {
-      cn: 'cn-1-',
-      cn1: 'cn-2-',
-      cn2: 'cn-3-',
-      num: 'num-1-',
-      num1: 'num-2-',
-      num2: 'num-3-',
-      dash: 'dash',
-      dot: 'dot'
+      'cn': 'cn-1-',
+      'cn1': 'cn-2-',
+      'cn2': 'cn-3-',
+      'num': 'num-1-',
+      'num1': 'num-2-',
+      'num2': 'num-3-',
+      'dash': 'dash',
+      'dot': 'dot'
     };
+
 
   utils.extend(this, {
     liiconpath: 'https://bs.baidu.com/listicon/',
@@ -37,32 +38,24 @@ UE.parse.register('list', function(utils) {
     utils.cssRule('list', selector + ' ol,' + selector + ' ul{margin:0;padding:0;}li{clear:both;}' + customCss.join('\n'), document);
   }
 
-  function applyStyle(nodes) {
+  function applyStyle (nodes) {
     var T = this;
-    utils.each(nodes, function(list) {
+    utils.each(nodes, function (list) {
       if (list.className && /custom_/i.test(list.className)) {
         var listStyle = list.className.match(/custom_(\w+)/)[1];
         if (listStyle == 'dash' || listStyle == 'dot') {
           utils.pushItem(customCss, selector + ' li.list-' + customStyle[listStyle] + '{background-image:url(' + T.liiconpath + customStyle[listStyle] + '.gif)}');
-          utils.pushItem(
-            customCss,
-            selector + ' ul.custom_' + listStyle + '{list-style:none;} ' + selector + ' ul.custom_' + listStyle + ' li{background-position:0 3px;background-repeat:no-repeat}'
-          );
+          utils.pushItem(customCss, selector + ' ul.custom_' + listStyle + '{list-style:none;} ' + selector + ' ul.custom_' + listStyle + ' li{background-position:0 3px;background-repeat:no-repeat}');
+
         } else {
           var index = 1;
-          utils.each(list.childNodes, function(li) {
+          utils.each(list.childNodes, function (li) {
             if (li.tagName == 'LI') {
-              utils.pushItem(
-                customCss,
-                selector + ' li.list-' + customStyle[listStyle] + index + '{background-image:url(' + T.liiconpath + 'list-' + customStyle[listStyle] + index + '.gif)}'
-              );
+              utils.pushItem(customCss, selector + ' li.list-' + customStyle[listStyle] + index + '{background-image:url(' + T.liiconpath + 'list-' + customStyle[listStyle] + index + '.gif)}');
               index++;
             }
           });
-          utils.pushItem(
-            customCss,
-            selector + ' ol.custom_' + listStyle + '{list-style:none;}' + selector + ' ol.custom_' + listStyle + ' li{background-position:0 3px;background-repeat:no-repeat}'
-          );
+          utils.pushItem(customCss, selector + ' ol.custom_' + listStyle + '{list-style:none;}' + selector + ' ol.custom_' + listStyle + ' li{background-position:0 3px;background-repeat:no-repeat}');
         }
         switch (listStyle) {
           case 'cn':
@@ -97,4 +90,6 @@ UE.parse.register('list', function(utils) {
       }
     });
   }
+
+
 });
