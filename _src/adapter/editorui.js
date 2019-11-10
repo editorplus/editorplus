@@ -38,7 +38,6 @@
     gmap: '~/dialogs/gmap/gmap.html',
     insertvideo: '~/dialogs/video/video.html',
     help: '~/dialogs/help/help.html',
-    preview: '~/dialogs/preview/preview.html',
     emotion: '~/dialogs/emotion/emotion.html',
     attachment: '~/dialogs/attachment/attachment.html',
     insertframe: '~/dialogs/insertframe/insertframe.html',
@@ -171,7 +170,7 @@
   }
 
   var dialogBtns = {
-    noOk: ['searchreplace', 'help', 'spechars', 'preview'],
+    noOk: ['searchreplace', 'help', 'spechars'],
     ok: ['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe',
       'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'template', 'background', 'charts']
   };

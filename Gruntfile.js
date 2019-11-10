@@ -52,7 +52,6 @@ module.exports = function (grunt) {
           '_src/plugins/convertcase.js',
           '_src/plugins/indent.js',
           '_src/plugins/print.js',
-          '_src/plugins/preview.js',
           '_src/plugins/selectall.js',
           '_src/plugins/paragraph.js',
           '_src/plugins/directionality.js',
