@@ -1062,11 +1062,11 @@
     },
 
     /**
-     *  调整当前range的边界到书签位置，并删除该书签对象所标记的位置内的节点
-     *  @method  moveToBookmark
-     *  @param { BookMark } bookmark createBookmark所创建的标签对象
-     *  @return { UE.dom.Range } 当前range对象
-     *  @see UE.dom.Range:createBookmark(Boolean)
+     * 调整当前range的边界到书签位置，并删除该书签对象所标记的位置内的节点
+     * method  moveToBookmark
+     * param { BookMark } bookmark createBookmark所创建的标签对象
+     * return { UE.dom.Range } 当前range对象
+     * see UE.dom.Range:createBookmark(Boolean)
      */
     moveToBookmark: function (bookmark) {
       var start = bookmark.id ? this.document.getElementById(bookmark.start) : bookmark.start;
