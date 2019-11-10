@@ -16,7 +16,10 @@
     "url": "https://github.com/editorplus/editorplus/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.15"
+    "@types/lodash": "^4.14.146",
+    "lodash": "^4.17.15",
+    "platform": "^1.3.5",
+    "superagent": "^5.1.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -28,6 +31,6 @@
   },
   "scripts": {
     "csfix": "semistandard --fix \"{_src,dialogs}/**/*.js\"",
-    "es5es6": "lebab --replace \"{_src,dialogs}/**/*.js\" --transform for-of,for-each"
+    "es5es6": "lebab --replace \"{_src,dialogs}/**/*.js\" --transform exponent"
   }
 }
