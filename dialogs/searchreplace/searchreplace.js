@@ -12,9 +12,9 @@ editor.currentRangeForSR = null;
 // 给tab注册切换事件
 /**
  * tab点击处理事件
- * @param tabHeads
- * @param tabBodys
- * @param obj
+ * param tabHeads
+ * param tabBodys
+ * param obj
  */
 function clickHandler (tabHeads, tabBodys, obj) {
   // head样式更改
@@ -37,7 +37,7 @@ function clickHandler (tabHeads, tabBodys, obj) {
 
 /**
  * TAB切换
- * @param tabParentId  tab的父节点ID或者对象本身
+ * param tabParentId  tab的父节点ID或者对象本身
  */
 function switchTab (tabParentId) {
   var tabElements = $G(tabParentId).children;

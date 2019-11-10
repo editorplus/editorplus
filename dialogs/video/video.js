@@ -92,7 +92,7 @@
 
   /**
      * 依据传入的align值更新按钮信息
-     * @param align
+     * param align
      */
   function updateAlignButton (align) {
     var aligns = $G('videoFloat').children;
@@ -129,7 +129,7 @@
 
   /**
      * 将元素id下的所有代表视频的图片插入编辑器中
-     * @param id
+     * param id
      */
   function insertSearch (id) {
     var imgs = domUtils.getElementsByTagName($G(id), 'img');
@@ -149,8 +149,8 @@
 
   /**
      * 找到id下具有focus类的节点并返回该节点下的某个属性
-     * @param id
-     * @param returnProperty
+     * param id
+     * param returnProperty
      */
   function findFocus (id, returnProperty) {
     var tabs = $G(id).children;
@@ -184,7 +184,7 @@
 
   /**
       * 检测传入的所有input框中输入的长宽是否是正数
-      * @param nodes input框集合，
+      * param nodes input框集合，
       */
   function checkNum (nodes) {
     for (var i = 0, ci; ci = nodes[i++];) {
@@ -201,7 +201,7 @@
 
   /**
      * 数字判断
-     * @param value
+     * param value
      */
   function isNumber (value) {
     return /(0|^[1-9]\d*$)/.test(value);
@@ -209,7 +209,7 @@
 
   /**
       * 创建图片浮动选择按钮
-      * @param ids
+      * param ids
       */
   function createAlignButton (ids) {
     for (var i = 0, ci; ci = ids[i++];) {
@@ -229,7 +229,7 @@
 
   /**
      * 选择切换
-     * @param selectParentId
+     * param selectParentId
      */
   function switchSelect (selectParentId) {
     var selects = $G(selectParentId).children;
@@ -246,7 +246,7 @@
 
   /**
      * 监听url改变事件
-     * @param url
+     * param url
      */
   function addUrlChangeListener (url) {
     url.addEventListener('input', function () {
@@ -256,7 +256,7 @@
 
   /**
      * 根据url生成视频预览
-     * @param url
+     * param url
      */
   function createPreviewVideo (url) {
     if (!url) return;
