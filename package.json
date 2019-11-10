@@ -27,7 +27,7 @@
     "semistandard": "^14.2.0"
   },
   "scripts": {
-    "csfix": "semistandard --fix \"{_parse,_src,dialogs}/**/*.js\"",
-    "es5es6": "lebab --replace \"{_parse,_src,dialogs}/**/*.js\" --transform for-of,for-each"
+    "csfix": "semistandard --fix \"{_src,dialogs}/**/*.js\"",
+    "es5es6": "lebab --replace \"{_src,dialogs}/**/*.js\" --transform for-of,for-each"
   }
 }

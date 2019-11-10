@@ -133,22 +133,6 @@ module.exports = function (grunt) {
           '_src/adapter/autosave.js'
         ],
         dest: releasedir + 'editorplus.all.js'
-      },
-      parse: {
-        options: {
-          banner: banner + '(function(){\n\n',
-          footer: '\n\n})();\n'
-        },
-        src: [
-          '_parse/parse.js',
-          '_parse/insertcode.js',
-          '_parse/table.js',
-          '_parse/charts.js',
-          '_parse/background.js',
-          '_parse/list.js',
-          '_parse/video.js'
-        ],
-        dest: releasedir + 'editorplus.parse.js'
       }
     },
     uglify: {
@@ -158,10 +142,6 @@ module.exports = function (grunt) {
       dest: {
         src: releasedir + 'editorplus.all.js',
         dest: releasedir + 'editorplus.all.min.js'
-      },
-      parse: {
-        src: releasedir + 'editorplus.parse.js',
-        dest: releasedir + 'editorplus.parse.min.js'
       }
     },
     copy: {
