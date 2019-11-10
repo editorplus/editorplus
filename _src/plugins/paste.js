@@ -6,8 +6,8 @@
 /// commandsName  PastePlain
 /// commandsTitle  纯文本粘贴模式
 /**
- * @description 粘贴
- * @author zhanyi
+ * description 粘贴
+ * author zhanyi
  */
 UE.plugins.paste = function () {
   function getClipboardData (callback) {

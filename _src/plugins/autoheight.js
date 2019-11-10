@@ -3,8 +3,8 @@
 /// commandsName  AutoHeight,autoHeightEnabled
 /// commandsTitle  自动增高
 /**
- * @description 自动伸展
- * @author zhanyi
+ * description 自动伸展
+ * author zhanyi
  */
 UE.plugins.autoheight = function () {
   var me = this;

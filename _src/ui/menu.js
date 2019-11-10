@@ -121,8 +121,8 @@
   utils.inherits(Menu, Popup);
 
   /**
-     * @update 2013/04/03 hancong03 新增一个参数menu, 该参数存储了menuItem所对应的menu引用
-     * @type {Function}
+     * update 2013/04/03 hancong03 新增一个参数menu, 该参数存储了menuItem所对应的menu引用
+     * type {Function}
      */
   var MenuItem = baidu.editor.ui.MenuItem = function (options) {
     this.initOptions(options);

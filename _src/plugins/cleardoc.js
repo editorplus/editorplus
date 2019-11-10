@@ -1,15 +1,15 @@
 /**
  * 清空文档插件
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 清空文档
- * @command cleardoc
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command cleardoc
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * //editor 是编辑器实例
  * editor.execCommand('cleardoc');

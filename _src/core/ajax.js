@@ -1,12 +1,12 @@
 /**
- * @file
- * @module UE.ajax
- * @since 1.2.6.1
+ * file
+ * module UE.ajax
+ * since 1.2.6.1
  */
 
 /**
  * 提供对ajax请求的支持
- * @module UE.ajax
+ * module UE.ajax
  */
 UE.ajax = (function () {
   // 创建一个ajaxRequest对象
@@ -25,7 +25,7 @@ UE.ajax = (function () {
 
   /**
    * 将json参数转化成适合ajax提交的参数列表
-   * @param json
+   * param json
    */
   function json2str (json) {
     var strArr = [];
@@ -188,10 +188,10 @@ UE.ajax = (function () {
     /**
      * 根据给定的参数项，向指定的url发起一个ajax请求。 ajax请求完成后，会根据请求结果调用相应回调： 如果请求
      * 成功， 则调用onsuccess回调， 失败则调用 onerror 回调
-     * @method request
-     * @param { URLString } url ajax请求的url地址
-     * @param { Object } ajaxOptions ajax请求选项的键值对，支持的选项如下：
-     * @example
+     * method request
+     * param { URLString } url ajax请求的url地址
+     * param { Object } ajaxOptions ajax请求选项的键值对，支持的选项如下：
+     * example
      * ```javascript
      * //向sayhello.php发起一个异步的Ajax GET请求, 请求超时时间为10s， 请求完成后执行相应的回调。
      * UE.ajax.requeset( 'sayhello.php', {
@@ -227,10 +227,10 @@ UE.ajax = (function () {
     /**
      * 根据给定的参数项发起一个ajax请求， 参数项里必须包含一个url地址。 ajax请求完成后，会根据请求结果调用相应回调： 如果请求
      * 成功， 则调用onsuccess回调， 失败则调用 onerror 回调。
-     * @method request
-     * @warning 如果在参数项里未提供一个key为“url”的地址值，则该请求将直接退出。
-     * @param { Object } ajaxOptions ajax请求选项的键值对，支持的选项如下：
-     * @example
+     * method request
+     * warning 如果在参数项里未提供一个key为“url”的地址值，则该请求将直接退出。
+     * param { Object } ajaxOptions ajax请求选项的键值对，支持的选项如下：
+     * example
      * ```javascript
      *
      * //向sayhello.php发起一个异步的Ajax POST请求, 请求超时时间为5s， 请求完成后不执行任何回调。

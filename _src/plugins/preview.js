@@ -1,15 +1,15 @@
 /**
  * 预览
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 预览
- * @command preview
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command preview
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'preview' );
  * ```

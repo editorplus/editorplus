@@ -3,8 +3,8 @@
 /// import core/utils.js
 /**
  * dtd html语义化的体现类
- * @constructor
- * @namespace dtd
+ * constructor
+ * namespace dtd
  */
 var dtd = dom.dtd = (function () {
   function _ (s) {

@@ -1,7 +1,7 @@
 /**
  * 设置文字输入的方向的插件
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 (function () {
   var block = domUtils.isBlockElm;
@@ -72,11 +72,11 @@
 
   /**
      * 文字输入方向
-     * @command directionality
-     * @method execCommand
-     * @param { String } cmdName 命令字符串
-     * @param { String } forward 传入'ltr'表示从左向右输入，传入'rtl'表示从右向左输入
-     * @example
+     * command directionality
+     * method execCommand
+     * param { String } cmdName 命令字符串
+     * param { String } forward 传入'ltr'表示从左向右输入，传入'rtl'表示从右向左输入
+     * example
      * ```javascript
      * editor.execCommand( 'directionality', 'ltr');
      * ```
@@ -84,11 +84,11 @@
 
   /**
      * 查询当前选区的文字输入方向
-     * @command directionality
-     * @method queryCommandValue
-     * @param { String } cmdName 命令字符串
-     * @return { String } 返回'ltr'表示从左向右输入，返回'rtl'表示从右向左输入
-     * @example
+     * command directionality
+     * method queryCommandValue
+     * param { String } cmdName 命令字符串
+     * return { String } 返回'ltr'表示从左向右输入，返回'rtl'表示从右向左输入
+     * example
      * ```javascript
      * editor.queryCommandValue( 'directionality');
      * ```

@@ -4,9 +4,9 @@
 /// commandsTitle  弹出菜单
 /**
  * 弹出菜单
- * @function
- * @name baidu.editor.plugins.popupmenu
- * @author xuheng
+ * function
+ * name baidu.editor.plugins.popupmenu
+ * author xuheng
  */
 
 UE.plugins.shortcutmenu = function () {

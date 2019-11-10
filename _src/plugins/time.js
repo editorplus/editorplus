@@ -1,15 +1,15 @@
 /**
  * 插入时间和日期
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 插入时间，默认格式：12:59:59
- * @command time
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command time
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'time');
  * ```
@@ -17,10 +17,10 @@
 
 /**
  * 插入日期，默认格式：2013-08-30
- * @command date
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command date
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'date');
  * ```

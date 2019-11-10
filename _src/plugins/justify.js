@@ -1,27 +1,27 @@
 /**
  * 段落格式
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 段落对齐方式
- * @command justify
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { String } align 对齐方式：left => 居左，right => 居右，center => 居中，justify => 两端对齐
- * @example
+ * command justify
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { String } align 对齐方式：left => 居左，right => 居右，center => 居中，justify => 两端对齐
+ * example
  * ```javascript
  * editor.execCommand( 'justify', 'center' );
  * ```
  */
 /**
  * 如果选区所在位置是段落区域，返回当前段落对齐方式
- * @command justify
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { String } 返回段落对齐方式
- * @example
+ * command justify
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { String } 返回段落对齐方式
+ * example
  * ```javascript
  * editor.queryCommandValue( 'justify' );
  * ```

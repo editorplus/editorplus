@@ -763,20 +763,20 @@
   };
 
   /**
-     * @file
-     * @name UE
-     * @short UE
-     * @desc UEditor的顶部命名空间
+     * file
+     * name UE
+     * short UE
+     * desc UEditor的顶部命名空间
      */
   /**
-     * @name getEditor
-     * @since 1.2.4+
-     * @grammar UE.getEditor(id,[opt])  =>  Editor实例
-     * @desc 提供一个全局的方法得到编辑器实例
+     * name getEditor
+     * since 1.2.4+
+     * grammar UE.getEditor(id,[opt])  =>  Editor实例
+     * desc 提供一个全局的方法得到编辑器实例
      *
      * * ''id''  放置编辑器的容器id, 如果容器下的编辑器已经存在，就直接返回
      * * ''opt'' 编辑器的可选参数
-     * @example
+     * example
      *  UE.getEditor('containerId',{onready:function(){//创建一个编辑器实例
      *      this.setContent('hello')
      *  }});

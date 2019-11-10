@@ -1,21 +1,21 @@
 /**
  * UE过滤word的静态方法
- * @file
+ * file
  */
 
 /**
  * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @module UE
+ * module UE
  */
 
 /**
  * 根据传入html字符串过滤word
- * @module UE
- * @since 1.2.6.1
- * @method filterWord
- * @param { String } html html字符串
- * @return { String } 已过滤后的结果字符串
- * @example
+ * module UE
+ * since 1.2.6.1
+ * method filterWord
+ * param { String } html html字符串
+ * return { String } 已过滤后的结果字符串
+ * example
  * ```javascript
  * UE.filterWord(html);
  * ```

@@ -1,15 +1,15 @@
 /**
  * 插入段落
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 插入段落
- * @command insertparagraph
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command insertparagraph
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * //editor是编辑器实例
  * editor.execCommand( 'insertparagraph' );

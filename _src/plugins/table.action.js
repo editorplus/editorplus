@@ -668,8 +668,8 @@ UE.plugins.table = function () {
   });
   /**
      * 删除obj的宽高style，改成属性宽高
-     * @param obj
-     * @param replaceToProperty
+     * param obj
+     * param replaceToProperty
      */
   function removeStyleSize (obj, replaceToProperty) {
     removeStyle(obj, 'width', true);
@@ -868,8 +868,8 @@ UE.plugins.table = function () {
 
   /**
      * 获取拖动时允许的X轴坐标
-     * @param dragTd
-     * @param evt
+     * param dragTd
+     * param evt
      */
   function getPermissionX (dragTd, evt) {
     var ut = getUETable(dragTd);
@@ -914,7 +914,7 @@ UE.plugins.table = function () {
 
   /**
      * 获取与UETable相关的resize line
-     * @param uetable UETable对象
+     * param uetable UETable对象
      */
   function getResizeLineByUETable () {
     var lineId = '_UETableResizeLine';
@@ -975,8 +975,8 @@ UE.plugins.table = function () {
 
   /**
      * 获取鼠标与当前单元格的相对位置
-     * @param ele
-     * @param mousePos
+     * param ele
+     * param mousePos
      */
   function getRelation (ele, mousePos) {
     var elePos = domUtils.getXY(ele);
@@ -1409,7 +1409,7 @@ UE.plugins.table = function () {
 
   /**
      * 获取调整单元格大小的相关单元格
-     * @isContainMergeCell 返回的结果中是否包含发生合并后的单元格
+     * isContainMergeCell 返回的结果中是否包含发生合并后的单元格
      */
   function getCellsByMoveBorder (cell, table, isContainMergeCell) {
     if (!table) {
@@ -1620,8 +1620,8 @@ UE.plugins.table = function () {
 
   /**
      * 依据state（v|h）在cell位置显示横线
-     * @param state
-     * @param cell
+     * param state
+     * param cell
      */
   function showDragLineAt (state, cell) {
     if (!cell) return;
@@ -1647,8 +1647,8 @@ UE.plugins.table = function () {
 
   /**
      * 当表格边框颜色为白色时设置为虚线,true为添加虚线
-     * @param editor
-     * @param flag
+     * param editor
+     * param flag
      */
   function switchBorderColor (editor, flag) {
     var tableArr = domUtils.getElementsByTagName(editor.body, 'table'); var color;

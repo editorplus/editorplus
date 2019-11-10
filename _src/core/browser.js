@@ -1,11 +1,11 @@
 /**
  * 提供浏览器检测的模块
- * @module UE.browser
+ * module UE.browser
  */
 var browser = UE.browser = (function () {
   /**
-   * @see https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-   * @type {{
+   * see https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+   * type {{
    * quirks: boolean,
    * gecko: boolean,
    * ie: boolean,
@@ -46,14 +46,14 @@ var browser = UE.browser = (function () {
   }
 
   /**
-   * @property { Number } version 检测当前浏览器版本号
-   * @remind
+   * property { Number } version 检测当前浏览器版本号
+   * remind
    * <ul>
    *     <li>IE系列返回值为5,6,7,8,9,10等</li>
    *     <li>gecko系列会返回10900，158900等</li>
    *     <li>webkit系列会返回其build号 (如 522等)</li>
    * </ul>
-   * @example
+   * example
    * ```javascript
    * console.log( '当前浏览器版本号是： ' + UE.browser.version );
    * ```

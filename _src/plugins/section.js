@@ -1,7 +1,7 @@
 /**
  * 目录大纲支持插件
- * @file
- * @since 1.3.0
+ * file
+ * since 1.3.0
  */
 UE.plugin.register('section', function () {
   /* 目录节点对象 */

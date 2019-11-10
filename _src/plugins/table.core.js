@@ -7,8 +7,8 @@
  */
 /**
  * UE表格操作类
- * @param table
- * @constructor
+ * param table
+ * constructor
  */
 (function () {
   var UETable = UE.UETable = function (table) {
@@ -52,8 +52,8 @@
   /**
      * 获取单元格或者单元格组的“对齐”状态。 如果当前的检测对象是一个单元格组， 只有在满足所有单元格的 水平和竖直 对齐属性都相同的
      * 条件时才会返回其状态值，否则将返回null； 如果当前只检测了一个单元格， 则直接返回当前单元格的对齐状态；
-     * @param table cell or table cells , 支持单个单元格dom对象 或者 单元格dom对象数组
-     * @return { align: 'left' || 'right' || 'center', valign: 'top' || 'middle' || 'bottom' } 或者 null
+     * param table cell or table cells , 支持单个单元格dom对象 或者 单元格dom对象数组
+     * return { align: 'left' || 'right' || 'center', valign: 'top' || 'middle' || 'bottom' } 或者 null
      */
   UETable.getTableCellAlignState = function (cells) {
     !utils.isArray(cells) && (cells = [cells]);
@@ -83,7 +83,7 @@
 
   /**
      * 根据当前选区获取相关的table信息
-     * @return {Object}
+     * return {Object}
      */
   UETable.getTableItemsByRange = function (editor) {
     var start = editor.selection.getStart();
@@ -155,7 +155,7 @@
   };
   /**
      * 根据当前点击的td或者table获取索引对象
-     * @param tdOrTable
+     * param tdOrTable
      */
   UETable.getUETable = function (tdOrTable) {
     var tag = tdOrTable.tagName.toLowerCase();
@@ -231,8 +231,8 @@
     },
     /**
          * 获取当前cell旁边的单元格，
-         * @param cell
-         * @param right
+         * param cell
+         * param right
          */
     getHSideCell: function (cell, right) {
       try {
@@ -270,8 +270,8 @@
     },
     /**
          * 获取视觉上的后置单元格
-         * @param cell
-         * @param bottom
+         * param cell
+         * param bottom
          */
     getVSideCell: function (cell, bottom, ignoreRange) {
       try {
@@ -617,8 +617,8 @@
     },
     /**
          * 获取视觉上的前置单元格，默认是左边，top传入时
-         * @param cell
-         * @param top
+         * param cell
+         * param top
          */
     getNextCell: function (cell, bottom, ignoreRange) {
       try {
@@ -814,7 +814,7 @@
     },
     /**
          * 删除一行单元格
-         * @param rowIndex
+         * param rowIndex
          */
     deleteRow: function (rowIndex) {
       var row = this.table.rows[rowIndex];

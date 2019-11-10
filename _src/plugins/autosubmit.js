@@ -1,15 +1,15 @@
 /**
  * 快捷键提交
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 提交表单
- * @command autosubmit
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command autosubmit
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'autosubmit' );
  * ```

@@ -1,16 +1,16 @@
 /**
  * 格式刷，只格式inline的
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 格式刷
- * @command formatmatch
- * @method execCommand
- * @remind 该操作不能复制段落格式
- * @param { String } cmd 命令字符串
- * @example
+ * command formatmatch
+ * method execCommand
+ * remind 该操作不能复制段落格式
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * //editor是编辑器实例
  * //获取格式刷
