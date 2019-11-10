@@ -1,23 +1,23 @@
 /**
  * html字符串转换成uNode节点
- * @file
- * @module UE
- * @since 1.2.6.1
+ * file
+ * module UE
+ * since 1.2.6.1
  */
 
 /**
  * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @unfile
- * @module UE
+ * unfile
+ * module UE
  */
 
 /**
  * html字符串转换成uNode节点的静态方法
- * @method htmlparser
- * @param { String } htmlstr 要转换的html代码
- * @param { Boolean } ignoreBlank 若设置为true，转换的时候忽略\n\r\t等空白字符
- * @return { uNode } 给定的html片段转换形成的uNode对象
- * @example
+ * method htmlparser
+ * param { String } htmlstr 要转换的html代码
+ * param { Boolean } ignoreBlank 若设置为true，转换的时候忽略\n\r\t等空白字符
+ * return { uNode } 给定的html片段转换形成的uNode对象
+ * example
  * ```javascript
  * var root = UE.htmlparser('<p><b>htmlparser</b></p>', true);
  * ```

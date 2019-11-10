@@ -1,7 +1,7 @@
 /**
- * @file xssFilter.js
- * @desc xss过滤器
- * @author robbenmu
+ * file xssFilter.js
+ * desc xss过滤器
+ * author robbenmu
  */
 
 UE.plugins.xssFilter = function () {

@@ -1,9 +1,9 @@
 /**
- * @description
+ * description
  * 1.拖放文件到编辑区域，自动上传并插入到选区
  * 2.插入粘贴板的图片，自动上传并插入到选区
- * @author Jinqn
- * @date 2013-10-14
+ * author Jinqn
+ * date 2013-10-14
  */
 UE.plugin.register('autoupload', function () {
   function sendAndInsertFile (file, editor) {

@@ -1,16 +1,16 @@
 /**
  * 超链接
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 插入超链接
- * @command link
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { Object } options   设置自定义属性，例如：url、title、target
- * @example
+ * command link
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { Object } options   设置自定义属性，例如：url、title、target
+ * example
  * ```javascript
  * editor.execCommand( 'link', '{
  *     url:'ueditor.baidu.com',
@@ -21,11 +21,11 @@
  */
 /**
  * 返回当前选中的第一个超链接节点
- * @command link
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { Element } 超链接节点
- * @example
+ * command link
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { Element } 超链接节点
+ * example
  * ```javascript
  * editor.queryCommandValue( 'link' );
  * ```
@@ -33,10 +33,10 @@
 
 /**
  * 取消超链接
- * @command unlink
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command unlink
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'unlink');
  * ```

@@ -1,15 +1,15 @@
 /**
  * 自动排版
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 对当前编辑器的内容执行自动排版， 排版的行为根据config配置文件里的“autotypeset”选项进行控制。
- * @command autotypeset
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command autotypeset
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'autotypeset' );
  * ```

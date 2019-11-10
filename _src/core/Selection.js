@@ -1,16 +1,16 @@
 /**
  * 选集
- * @file
- * @module UE.dom
- * @class Selection
- * @since 1.2.6.1
+ * file
+ * module UE.dom
+ * class Selection
+ * since 1.2.6.1
  */
 
 /**
  * 选区集合
- * @unfile
- * @module UE.dom
- * @class Selection
+ * unfile
+ * module UE.dom
+ * class Selection
  */
 (function () {
   function getBoundaryInformation (range, start) {
@@ -79,9 +79,9 @@
 
   /**
    * 将ieRange转换为Range对象
-   * @param {Range}   ieRange    ieRange对象
-   * @param {Range}   range      Range对象
-   * @return  {Range}  range       返回转换后的Range对象
+   * param {Range}   ieRange    ieRange对象
+   * param {Range}   range      Range对象
+   * return  {Range}  range       返回转换后的Range对象
    */
   function transformIERangeToRange (ieRange, range) {
     if (ieRange.item) {
@@ -99,8 +99,8 @@
 
   /**
    * 获得ieRange
-   * @param {Selection} sel    Selection对象
-   * @return {ieRange}    得到ieRange
+   * param {Selection} sel    Selection对象
+   * return {ieRange}    得到ieRange
    */
   function _getIERange (sel) {
     var ieRange;
@@ -133,9 +133,9 @@
 
     /**
      * 获取原生seleciton对象
-     * @method getNative
-     * @return { Object } 获得selection对象
-     * @example
+     * method getNative
+     * return { Object } 获得selection对象
+     * example
      * ```javascript
      * editor.selection.getNative();
      * ```
@@ -151,9 +151,9 @@
 
     /**
      * 获得ieRange
-     * @method getIERange
-     * @return { Object } 返回ie原生的Range
-     * @example
+     * method getIERange
+     * return { Object } 返回ie原生的Range
+     * example
      * ```javascript
      * editor.selection.getIERange();
      * ```
@@ -170,7 +170,7 @@
 
     /**
      * 缓存当前选区的range和选区的开始节点
-     * @method cache
+     * method cache
      */
     cache: function () {
       this.clear();
@@ -181,9 +181,9 @@
 
     /**
      * 获取选区开始位置的父节点到body
-     * @method getStartElementPath
-     * @return { Array } 返回父节点集合
-     * @example
+     * method getStartElementPath
+     * return { Array } 返回父节点集合
+     * example
      * ```javascript
      * editor.selection.getStartElementPath();
      * ```
@@ -201,7 +201,7 @@
 
     /**
      * 清空缓存
-     * @method clear
+     * method clear
      */
     clear: function () {
       this._cachedStartElementPath = this._cachedRange = this._cachedStartElement = null;
@@ -209,7 +209,7 @@
 
     /**
      * 编辑器是否得到了选区
-     * @method isFocus
+     * method isFocus
      */
     isFocus: function () {
       try {
@@ -221,9 +221,9 @@
 
     /**
      * 获取选区对应的Range
-     * @method getRange
-     * @return { Object } 得到Range对象
-     * @example
+     * method getRange
+     * return { Object } 得到Range对象
+     * example
      * ```javascript
      * editor.selection.getRange();
      * ```
@@ -272,9 +272,9 @@
 
     /**
      * 获取开始元素，用于状态反射
-     * @method getStart
-     * @return { Element } 获得开始元素
-     * @example
+     * method getStart
+     * return { Element } 获得开始元素
+     * example
      * ```javascript
      * editor.selection.getStart();
      * ```
@@ -301,9 +301,9 @@
 
     /**
      * 得到选区中的文本
-     * @method getText
-     * @return { String } 选区中包含的文本
-     * @example
+     * method getText
+     * return { String } 选区中包含的文本
+     * example
      * ```javascript
      * editor.selection.getText();
      * ```
@@ -319,8 +319,8 @@
 
     /**
      * 清除选区
-     * @method clearRange
-     * @example
+     * method clearRange
+     * example
      * ```javascript
      * editor.selection.clearRange();
      * ```

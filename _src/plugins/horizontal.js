@@ -1,15 +1,15 @@
 /**
  * 插入分割线插件
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 插入分割线
- * @command horizontal
- * @method execCommand
- * @param { String } cmdName 命令字符串
- * @example
+ * command horizontal
+ * method execCommand
+ * param { String } cmdName 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'horizontal' );
  * ```

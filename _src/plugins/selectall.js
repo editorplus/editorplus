@@ -1,15 +1,15 @@
 /**
  * 全选
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 选中所有内容
- * @command selectall
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command selectall
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'selectall' );
  * ```

@@ -1,6 +1,6 @@
 /**
  * 选取路径命令
- * @file
+ * file
  */
 UE.plugins.elementpath = function () {
   var currentLevel;

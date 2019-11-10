@@ -1,7 +1,7 @@
 /**
  * 锚点插件，为UEditor提供插入锚点支持
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 UE.plugin.register('anchor', function () {
   return {
@@ -43,11 +43,11 @@ UE.plugin.register('anchor', function () {
     commands: {
       /**
             * 插入锚点
-            * @command anchor
-            * @method execCommand
-            * @param { String } cmd 命令字符串
-            * @param { String } name 锚点名称字符串
-            * @example
+            * command anchor
+            * method execCommand
+            * param { String } cmd 命令字符串
+            * param { String } name 锚点名称字符串
+            * example
             * ```javascript
             * //editor 是编辑器实例
             * editor.execCommand('anchor', 'anchor1');

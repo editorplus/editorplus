@@ -1,7 +1,7 @@
 /**
  * 插入代码插件
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 UE.plugins.insertcode = function () {
@@ -39,11 +39,11 @@ UE.plugins.insertcode = function () {
 
   /**
      * 插入代码
-     * @command insertcode
-     * @method execCommand
-     * @param { String } cmd 命令字符串
-     * @param { String } lang 插入代码的语言
-     * @example
+     * command insertcode
+     * method execCommand
+     * param { String } cmd 命令字符串
+     * param { String } lang 插入代码的语言
+     * example
      * ```javascript
      * editor.execCommand( 'insertcode', 'javascript' );
      * ```
@@ -51,11 +51,11 @@ UE.plugins.insertcode = function () {
 
   /**
      * 如果选区所在位置是插入插入代码区域，返回代码的语言
-     * @command insertcode
-     * @method queryCommandValue
-     * @param { String } cmd 命令字符串
-     * @return { String } 返回代码的语言
-     * @example
+     * command insertcode
+     * method queryCommandValue
+     * param { String } cmd 命令字符串
+     * return { String } 返回代码的语言
+     * example
      * ```javascript
      * editor.queryCommandValue( 'insertcode' );
      * ```

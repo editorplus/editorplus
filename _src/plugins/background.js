@@ -1,7 +1,7 @@
 /**
  * 背景插件，为UEditor提供设置背景功能
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 UE.plugin.register('background', function () {
   var me = this;

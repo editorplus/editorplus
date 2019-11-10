@@ -1,15 +1,15 @@
 /**
  * undo redo
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 撤销上一次执行的命令
- * @command undo
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command undo
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'undo' );
  * ```
@@ -17,10 +17,10 @@
 
 /**
  * 重做上一次执行的命令
- * @command redo
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command redo
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'redo' );
  * ```

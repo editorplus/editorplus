@@ -4,9 +4,9 @@
 /// commandsTitle  右键菜单
 /**
  * 右键菜单
- * @function
- * @name baidu.editor.plugins.contextmenu
- * @author zhanyi
+ * function
+ * name baidu.editor.plugins.contextmenu
+ * author zhanyi
  */
 
 UE.plugins.contextmenu = function () {

@@ -1,17 +1,17 @@
 /**
  * B、I、sub、super命令支持
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 UE.plugins.basestyle = function () {
   /**
      * 字体加粗
-     * @command bold
-     * @param { String } cmd 命令字符串
-     * @remind 对已加粗的文本内容执行该命令， 将取消加粗
-     * @method execCommand
-     * @example
+     * command bold
+     * param { String } cmd 命令字符串
+     * remind 对已加粗的文本内容执行该命令， 将取消加粗
+     * method execCommand
+     * example
      * ```javascript
      * //editor是编辑器实例
      * //对当前选中的文本内容执行加粗操作
@@ -25,11 +25,11 @@ UE.plugins.basestyle = function () {
 
   /**
      * 字体倾斜
-     * @command italic
-     * @method execCommand
-     * @param { String } cmd 命令字符串
-     * @remind 对已倾斜的文本内容执行该命令， 将取消倾斜
-     * @example
+     * command italic
+     * method execCommand
+     * param { String } cmd 命令字符串
+     * remind 对已倾斜的文本内容执行该命令， 将取消倾斜
+     * example
      * ```javascript
      * //editor是编辑器实例
      * //对当前选中的文本内容执行斜体操作
@@ -43,11 +43,11 @@ UE.plugins.basestyle = function () {
 
   /**
      * 下标文本，与“superscript”命令互斥
-     * @command subscript
-     * @method execCommand
-     * @remind  把选中的文本内容切换成下标文本， 如果当前选中的文本已经是下标， 则该操作会把文本内容还原成正常文本
-     * @param { String } cmd 命令字符串
-     * @example
+     * command subscript
+     * method execCommand
+     * remind  把选中的文本内容切换成下标文本， 如果当前选中的文本已经是下标， 则该操作会把文本内容还原成正常文本
+     * param { String } cmd 命令字符串
+     * example
      * ```javascript
      * //editor是编辑器实例
      * //对当前选中的文本内容执行下标操作
@@ -61,11 +61,11 @@ UE.plugins.basestyle = function () {
 
   /**
      * 上标文本，与“subscript”命令互斥
-     * @command superscript
-     * @method execCommand
-     * @remind 把选中的文本内容切换成上标文本， 如果当前选中的文本已经是上标， 则该操作会把文本内容还原成正常文本
-     * @param { String } cmd 命令字符串
-     * @example
+     * command superscript
+     * method execCommand
+     * remind 把选中的文本内容切换成上标文本， 如果当前选中的文本已经是上标， 则该操作会把文本内容还原成正常文本
+     * param { String } cmd 命令字符串
+     * example
      * ```javascript
      * //editor是编辑器实例
      * //对当前选中的文本内容执行上标操作

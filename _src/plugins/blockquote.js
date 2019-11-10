@@ -1,15 +1,15 @@
 /**
  * 添加引用
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 添加引用
- * @command blockquote
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command blockquote
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'blockquote' );
  * ```
@@ -17,11 +17,11 @@
 
 /**
  * 添加引用
- * @command blockquote
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { Object } attrs 节点属性
- * @example
+ * command blockquote
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { Object } attrs 节点属性
+ * example
  * ```javascript
  * editor.execCommand( 'blockquote',{
  *     style: "color: red;"

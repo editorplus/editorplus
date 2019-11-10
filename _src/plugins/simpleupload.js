@@ -1,8 +1,8 @@
 /**
- * @description
+ * description
  * 简单上传:点击按钮,直接选择文件上传
- * @author Jinqn
- * @date 2014-03-31
+ * author Jinqn
+ * date 2014-03-31
  */
 UE.plugin.register('simpleupload', function () {
   var me = this;

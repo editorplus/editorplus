@@ -1,7 +1,7 @@
 /**
  * 源码编辑插件
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 (function () {
@@ -87,10 +87,10 @@
 
     /**
          * 切换源码模式和编辑模式
-         * @command source
-         * @method execCommand
-         * @param { String } cmd 命令字符串
-         * @example
+         * command source
+         * method execCommand
+         * param { String } cmd 命令字符串
+         * example
          * ```javascript
          * editor.execCommand( 'source');
          * ```
@@ -98,11 +98,11 @@
 
     /**
          * 查询当前编辑区域的状态是源码模式还是可视化模式
-         * @command source
-         * @method queryCommandState
-         * @param { String } cmd 命令字符串
-         * @return { int } 如果当前是源码编辑模式，返回1，否则返回0
-         * @example
+         * command source
+         * method queryCommandState
+         * param { String } cmd 命令字符串
+         * return { int } 如果当前是源码编辑模式，返回1，否则返回0
+         * example
          * ```javascript
          * editor.queryCommandState( 'source' );
          * ```

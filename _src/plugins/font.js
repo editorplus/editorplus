@@ -1,27 +1,27 @@
 /**
  * 字体颜色,背景色,字号,字体,下划线,删除线
- * @file
- * @since 1.2.6.1
+ * file
+ * since 1.2.6.1
  */
 
 /**
  * 字体颜色
- * @command forecolor
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { String } value 色值(必须十六进制)
- * @example
+ * command forecolor
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { String } value 色值(必须十六进制)
+ * example
  * ```javascript
  * editor.execCommand( 'forecolor', '#000' );
  * ```
  */
 /**
  * 返回选区字体颜色
- * @command forecolor
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { String } 返回字体颜色
- * @example
+ * command forecolor
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { String } 返回字体颜色
+ * example
  * ```javascript
  * editor.queryCommandValue( 'forecolor' );
  * ```
@@ -29,22 +29,22 @@
 
 /**
  * 字体背景颜色
- * @command backcolor
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { String } value 色值(必须十六进制)
- * @example
+ * command backcolor
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { String } value 色值(必须十六进制)
+ * example
  * ```javascript
  * editor.execCommand( 'backcolor', '#000' );
  * ```
  */
 /**
  * 返回选区字体颜色
- * @command backcolor
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { String } 返回字体背景颜色
- * @example
+ * command backcolor
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { String } 返回字体背景颜色
+ * example
  * ```javascript
  * editor.queryCommandValue( 'backcolor' );
  * ```
@@ -52,22 +52,22 @@
 
 /**
  * 字体大小
- * @command fontsize
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { String } value 字体大小
- * @example
+ * command fontsize
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { String } value 字体大小
+ * example
  * ```javascript
  * editor.execCommand( 'fontsize', '14px' );
  * ```
  */
 /**
  * 返回选区字体大小
- * @command fontsize
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { String } 返回字体大小
- * @example
+ * command fontsize
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { String } 返回字体大小
+ * example
  * ```javascript
  * editor.queryCommandValue( 'fontsize' );
  * ```
@@ -75,22 +75,22 @@
 
 /**
  * 字体样式
- * @command fontfamily
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @param { String } value 字体样式
- * @example
+ * command fontfamily
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * param { String } value 字体样式
+ * example
  * ```javascript
  * editor.execCommand( 'fontfamily', '微软雅黑' );
  * ```
  */
 /**
  * 返回选区字体样式
- * @command fontfamily
- * @method queryCommandValue
- * @param { String } cmd 命令字符串
- * @return { String } 返回字体样式
- * @example
+ * command fontfamily
+ * method queryCommandValue
+ * param { String } cmd 命令字符串
+ * return { String } 返回字体样式
+ * example
  * ```javascript
  * editor.queryCommandValue( 'fontfamily' );
  * ```
@@ -98,10 +98,10 @@
 
 /**
  * 字体下划线,与删除线互斥
- * @command underline
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command underline
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'underline' );
  * ```
@@ -109,10 +109,10 @@
 
 /**
  * 字体删除线,与下划线互斥
- * @command strikethrough
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command strikethrough
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'strikethrough' );
  * ```
@@ -120,10 +120,10 @@
 
 /**
  * 字体边框
- * @command fontborder
- * @method execCommand
- * @param { String } cmd 命令字符串
- * @example
+ * command fontborder
+ * method execCommand
+ * param { String } cmd 命令字符串
+ * example
  * ```javascript
  * editor.execCommand( 'fontborder' );
  * ```
