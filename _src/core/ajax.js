@@ -243,18 +243,7 @@ UE.ajax = (function () {
      * ```
      */
     request: function (url, opts) {
-      if (opts && opts.dataType == 'jsonp') {
-        doJsonp(url, opts);
-      } else {
-        doAjax(url, opts);
-      }
+      doAjax(url, opts);
     },
-    getJSONP: function (url, data, fn) {
-      var opts = {
-        data: data,
-        oncomplete: fn
-      };
-      doJsonp(url, opts);
-    }
   };
 }());

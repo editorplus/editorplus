@@ -6,28 +6,23 @@
         me.options.imageUrl && me.setOpt('serverUrl', me.options.imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2'));
 
         var configUrl = me.getActionUrl('config');
-        var isJsonp = utils.isCrossDomainUrl(configUrl);
 
         /* 发出ajax请求 */
         me._serverConfigLoaded = false;
 
-        configUrl && UE.ajax.request(configUrl, {
-          method: 'GET',
-          dataType: isJsonp ? 'jsonp' : '',
-          onsuccess: function (r) {
-            try {
-              var config = isJsonp ? r : eval('(' + r.responseText + ')');
-              utils.extend(me.options, config);
-              me.fireEvent('serverConfigLoaded');
-              me._serverConfigLoaded = true;
-            } catch (e) {
-              showErrorMsg(me.getLang('loadconfigFormatError'));
-            }
-          },
-          onerror: function () {
-            showErrorMsg(me.getLang('loadconfigHttpError'));
-          }
-        });
+        axios.get(configUrl)
+          .then(function (response) {
+            console.log('axios then');
+            utils.extend(me.options, response.data);
+            me.fireEvent('serverConfigLoaded');
+            me._serverConfigLoaded = true;
+          })
+          .catch(function (error) {
+            console.log('axios catch', error);
+          })
+          .finally(function () {
+            console.log('axios finally');
+          });
       } catch (e) {
         showErrorMsg(me.getLang('loadconfigError'));
       }
