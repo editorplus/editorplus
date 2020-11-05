@@ -1,0 +1,116 @@
+UE.plugins.blockquote = function () {
+    var me = this;
+    function getObj(editor) {
+        return domUtils.filterNodeList(editor.selection.getStartElementPath(), 'blockquote');
+    }
+    me.commands.blockquote = {
+        execCommand: function (cmdName, attrs) {
+            var range = this.selection.getRange();
+            var obj = getObj(this);
+            var blockquote = dtd.blockquote;
+            var bookmark = range.createBookmark();
+            if (obj) {
+                var start = range.startContainer;
+                var startBlock = domUtils.isBlockElm(start) ? start : domUtils.findParent(start, function (node) { return domUtils.isBlockElm(node); });
+                var end = range.endContainer;
+                var endBlock = domUtils.isBlockElm(end) ? end : domUtils.findParent(end, function (node) { return domUtils.isBlockElm(node); });
+                startBlock = domUtils.findParentByTagName(startBlock, 'li', true) || startBlock;
+                endBlock = domUtils.findParentByTagName(endBlock, 'li', true) || endBlock;
+                if (startBlock.tagName == 'LI' || startBlock.tagName == 'TD' || startBlock === obj || domUtils.isBody(startBlock)) {
+                    domUtils.remove(obj, true);
+                }
+                else {
+                    domUtils.breakParent(startBlock, obj);
+                }
+                if (startBlock !== endBlock) {
+                    obj = domUtils.findParentByTagName(endBlock, 'blockquote');
+                    if (obj) {
+                        if (endBlock.tagName == 'LI' || endBlock.tagName == 'TD' || domUtils.isBody(endBlock)) {
+                            obj.parentNode && domUtils.remove(obj, true);
+                        }
+                        else {
+                            domUtils.breakParent(endBlock, obj);
+                        }
+                    }
+                }
+                var blockquotes = domUtils.getElementsByTagName(this.document, 'blockquote');
+                for (var i = 0, bi; bi = blockquotes[i++];) {
+                    if (!bi.childNodes.length) {
+                        domUtils.remove(bi);
+                    }
+                    else if (domUtils.getPosition(bi, startBlock) & domUtils.POSITION_FOLLOWING && domUtils.getPosition(bi, endBlock) & domUtils.POSITION_PRECEDING) {
+                        domUtils.remove(bi, true);
+                    }
+                }
+            }
+            else {
+                var tmpRange = range.cloneRange();
+                var node = tmpRange.startContainer.nodeType == 1 ? tmpRange.startContainer : tmpRange.startContainer.parentNode;
+                var preNode = node;
+                var doEnd = 1;
+                while (1) {
+                    if (domUtils.isBody(node)) {
+                        if (preNode !== node) {
+                            if (range.collapsed) {
+                                tmpRange.selectNode(preNode);
+                                doEnd = 0;
+                            }
+                            else {
+                                tmpRange.setStartBefore(preNode);
+                            }
+                        }
+                        else {
+                            tmpRange.setStart(node, 0);
+                        }
+                        break;
+                    }
+                    if (!blockquote[node.tagName]) {
+                        if (range.collapsed) {
+                            tmpRange.selectNode(preNode);
+                        }
+                        else {
+                            tmpRange.setStartBefore(preNode);
+                        }
+                        break;
+                    }
+                    preNode = node;
+                    node = node.parentNode;
+                }
+                if (doEnd) {
+                    preNode = node = node = tmpRange.endContainer.nodeType == 1 ? tmpRange.endContainer : tmpRange.endContainer.parentNode;
+                    while (1) {
+                        if (domUtils.isBody(node)) {
+                            if (preNode !== node) {
+                                tmpRange.setEndAfter(preNode);
+                            }
+                            else {
+                                tmpRange.setEnd(node, node.childNodes.length);
+                            }
+                            break;
+                        }
+                        if (!blockquote[node.tagName]) {
+                            tmpRange.setEndAfter(preNode);
+                            break;
+                        }
+                        preNode = node;
+                        node = node.parentNode;
+                    }
+                }
+                node = range.document.createElement('blockquote');
+                domUtils.setAttributes(node, attrs);
+                node.appendChild(tmpRange.extractContents());
+                tmpRange.insertNode(node);
+                var childs = domUtils.getElementsByTagName(node, 'blockquote');
+                for (var i = 0, ci; ci = childs[i++];) {
+                    if (ci.parentNode) {
+                        domUtils.remove(ci, true);
+                    }
+                }
+            }
+            range.moveToBookmark(bookmark).select();
+        },
+        queryCommandState: function () {
+            return getObj(this) ? 1 : 0;
+        }
+    };
+};
