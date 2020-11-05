@@ -8,7 +8,4 @@ dist/*
 !dist/editorplus.config.js
 !dist/index.html
 
-built/*
-!built/.gitkeep
-
 package-lock.json
