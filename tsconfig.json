@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./built",
+    "outDir": "./prebuild",
     "allowJs": true,
     "checkJs": false,
     "newLine": "lf",
