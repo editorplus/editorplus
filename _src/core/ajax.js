@@ -9,20 +9,6 @@
  * module UE.ajax
  */
 UE.ajax = (function () {
-  // 创建一个ajaxRequest对象
-  var fnStr = 'XMLHttpRequest()';
-  try {
-    new ActiveXObject('Msxml2.XMLHTTP');
-    fnStr = 'ActiveXObject(\'Msxml2.XMLHTTP\')';
-  } catch (e) {
-    try {
-      new ActiveXObject('Microsoft.XMLHTTP');
-      fnStr = 'ActiveXObject(\'Microsoft.XMLHTTP\')';
-    } catch (e) {
-    }
-  }
-  var creatAjaxRequest = new Function('return new ' + fnStr);
-
   /**
    * 将json参数转化成适合ajax提交的参数列表
    * param json
@@ -48,7 +34,7 @@ UE.ajax = (function () {
   }
 
   function doAjax (url, ajaxOptions) {
-    var xhr = creatAjaxRequest();
+    var xhr = new XMLHttpRequest();
     // 是否超时
     var timeIsOut = false;
     // 默认参数
