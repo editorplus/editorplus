@@ -33,6 +33,9 @@
   },
   "scripts": {
     "csfix": "semistandard --fix \"{_src,dialogs}/**/*.js\"",
-    "es5es6": "lebab --replace \"{_src,dialogs}/**/*.js\" --transform exponent"
+    "es5es6": "lebab --replace \"{_src,dialogs}/**/*.js\" --transform exponent",
+    "np-patch": "np patch --yolo --message=\"release v%s\"",
+    "np-minor": "np minor --yolo --message=\"release v%s\"",
+    "np-major": "np major --yolo --message=\"release v%s\""
   }
 }
