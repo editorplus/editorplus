@@ -4,7 +4,7 @@ UE.plugin.register('copy', function () {
   function initZeroClipboard () {
     ZeroClipboard.config({
       debug: false,
-      swfPath: 'https://cdn.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/zeroclipboard/ZeroClipboard.swf'
+      swfPath: 'https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/zeroclipboard/ZeroClipboard.swf'
     });
 
     var client = me.zeroclipboard = new ZeroClipboard();
@@ -42,7 +42,7 @@ UE.plugin.register('copy', function () {
           initZeroClipboard();
         } else {
           utils.loadFile(document, {
-            src: 'https://cdn.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/zeroclipboard/ZeroClipboard.js',
+            src: 'https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/zeroclipboard/ZeroClipboard.js',
             tag: 'script',
             type: 'text/javascript',
             defer: 'defer'
