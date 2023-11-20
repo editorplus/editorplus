@@ -29,7 +29,7 @@
     "lebab": "~3.1.0",
     "np": "7.6.2",
     "semistandard": "~14.2.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.3.2"
   },
   "scripts": {
     "csfix": "semistandard --fix \"{_src,dialogs}/**/*.js\"",
