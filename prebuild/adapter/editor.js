@@ -639,7 +639,7 @@
         var editor = new UE.Editor(options);
         editor.options.editor = editor;
         utils.loadFile(document, {
-            href: 'https://fastly.jsdelivr.net/npm/editorplus-themedefault@2.0.0/dist/editorplus.css',
+            href: 'https://unpkg.com/editorplus-themedefault@2.0.0/dist/editorplus.css',
             tag: 'link',
             type: 'text/css',
             rel: 'stylesheet'

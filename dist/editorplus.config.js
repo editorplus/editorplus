@@ -80,7 +80,7 @@
     //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
     //,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
 
-    ,iframeCssUrl: 'https://fastly.jsdelivr.net/npm/editorplus-themedefault@2.0.0/dist/iframe.css' //给编辑区域的iframe引入一个css文件
+    ,iframeCssUrl: 'https://unpkg.com/editorplus-themedefault@2.0.0/dist/iframe.css' //给编辑区域的iframe引入一个css文件
 
     //indentValue
     //首行缩进距离,默认是2em
@@ -325,10 +325,10 @@
     //注意默认codemirror只能在ie8+和非ie中使用
     //,sourceEditor:"codemirror"
     //如果sourceEditor是codemirror，还用配置一下两个参数
-    //codeMirrorJsUrl js加载的路径，默认是 "https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.js"
-    //,codeMirrorJsUrl:"https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.js"
-    //codeMirrorCssUrl css加载的路径，默认是 "https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.css"
-    //,codeMirrorCssUrl:"https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.css"
+    //codeMirrorJsUrl js加载的路径，默认是 "https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.js"
+    //,codeMirrorJsUrl:"https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.js"
+    //codeMirrorCssUrl css加载的路径，默认是 "https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.css"
+    //,codeMirrorCssUrl:"https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.css"
     //编辑器初始化完成后是否进入源码模式，默认为否。
     //,sourceEditorFirst:false
 

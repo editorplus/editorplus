@@ -250,7 +250,7 @@
     if (opt.sourceEditor == 'codemirror') {
       me.addListener('ready', function () {
         utils.loadFile(document, {
-          src: opt.codeMirrorJsUrl || 'https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.js',
+          src: opt.codeMirrorJsUrl || 'https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.js',
           tag: 'script',
           type: 'text/javascript',
           defer: 'defer'
@@ -265,7 +265,7 @@
           tag: 'link',
           rel: 'stylesheet',
           type: 'text/css',
-          href: opt.codeMirrorCssUrl || 'https://fastly.jsdelivr.net/npm/editorplus-thirdparty@2.0.0/codemirror/codemirror.css'
+          href: opt.codeMirrorCssUrl || 'https://unpkg.com/editorplus-thirdparty@2.0.0/codemirror/codemirror.css'
         });
       });
     }
