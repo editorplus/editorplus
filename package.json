@@ -28,7 +28,7 @@
     "grunt-contrib-copy": "~0.8.2",
     "grunt-contrib-uglify": "~1.0.2",
     "lebab": "~3.1.0",
-    "np": "7.6.2",
+    "np": "9.1.0",
     "semistandard": "~14.2.0",
     "typescript": "~5.2.2"
   },
